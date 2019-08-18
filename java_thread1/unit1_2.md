@@ -363,3 +363,37 @@ class FilledLong {
 }
 ```
 
+## 锁的类型
+- 悲观锁和乐观锁
+  - 悲观锁是指对并发问题持悲观态度，认为一定会发生并发问题，所以同一时间只允许一个线程来操作数据，是排它锁，其他的线程在这期间都会堵塞住。
+  - 乐观锁则是数据会有类似版本号的字段来表示，比如当前数据版本号是1，同一时间所有线程查询到这个版本号然后更新的时候和要更新的数据进行对比，如果版本号对的上就表示可以更新，对不上则表示数据已经被修改过了，直接更新失败，而不是像悲观锁那样阻塞住。
+- 公平锁和非公平锁
+  - 公平锁，```ReentrantLock lock = new ReentrantLock(true)```，如果A线程在执行，B线程被阻塞住，C线程再来，当A释放锁时一定会是B获得锁，会影响性能。
+  - 非公平锁，```ReentrantLock lock = new ReentrantLock(false)```，如果A线程在执行，B线程被阻塞住，C线程再来，当A释放锁时B和C都有可能获得锁。
+- 独占锁和共享锁
+  - 独占锁就是只有一个线程能拿到锁，例如```ReentrantLock```
+  - 共享锁就是多个线程可以共同持有锁，例如```ReadWriteLock```
+- 可重入锁
+  - 可重入锁就是同一个线程可以多次获取一个锁，内部有个计数器来计算一个线程的获取锁的次数，每次获取都要加1，每次释放都要减1。例如下面的方法，```synchronized```就是可重入锁，所以在methodA中调用methodB不会被阻塞住。
+  ```	
+  public static void main(String[] args) throws InterruptedException {
+	  methodA();
+  }
+
+  public static void methodA() throws InterruptedException {
+	  synchronized (lockA) {
+		  System.out.println("methodA");
+		  methodB();
+		  TimeUnit.SECONDS.sleep(5);
+	      System.out.println("methodA");
+	  }
+  }
+
+  public static synchronized void methodB() {
+	  synchronized (lockA) {
+		  System.out.println("methodB");
+		  System.out.println("methodB");
+	  }
+  }
+  ```
+  
