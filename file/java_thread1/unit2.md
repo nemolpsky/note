@@ -19,6 +19,35 @@
 - 使用场景
   当对变量的操作并不依赖当前变量的值，因为读取-计算-写入不是原子性操作，volatile也不保证原子性操作。
   
+## Unsafe类
+```Unsafe```类中都是```native```方法，所以提供了硬件级别的原子操作。但是```Java```对这个类做了限制，不能直接获取对象来操作。不过可以使用反射来获取实例，并发包中很多类都是基于这个类来实现。
+```
+public class UnsafeTest {
+	// Unsafe对象引用
+	static Unsafe unsafe;
+	// 偏移量
+	long l = 0;
+	
+	public static void main(String[] args) throws Exception {
+		// 反射获取Unsafe实例
+		Field field = Unsafe.class.getDeclaredField("theUnsafe");
+		// 设置为可取
+		field.setAccessible(true);
+		// 指向引用
+		unsafe = (Unsafe) field.get(null);
+		
+		// 计算变量l在内存中的偏移量
+		long offset = unsafe.objectFieldOffset(UnsafeTest.class.getDeclaredField("l"));
+	
+		// 调用compareAndSwapLong方法，第一个是操作的对象，第二个是偏移量等于当前传入值的值，第三个是期望值，第四个是更新值
+		// 下面的调用，会先获取UnsafeTest中偏移量等于offset的变量值，然后拿这个值和0对比，如果相同就更新为2，更新成功返回true，失败返回false
+		UnsafeTest test = new UnsafeTest();
+		System.out.println(unsafe.compareAndSwapLong(test, offset, 0, 2));
+		System.out.println(test.l);
+	}
+}
+```
+
 ## Java指令重排序
 Java允许编译器和处理器对执行的指令进行重排来提高性能，只要指令之间不存在依赖性。
 ```
