@@ -9,5 +9,7 @@
 	* [Java并发编程之美 第四章 笔记](file/java_thread1/unit4.md)
 	* [Java并发编程之美 第五章 笔记](file/java_thread1/unit5.md)
 	  - CopyOnWriteArrayList
+	* [Java并发编程之美 第六章 笔记](file/java_thread1/unit5.md)
+	  - [LockSupport](file/java_thread1/unit6_1.md)
   - 代码规范
     * [代码整洁之道 重点归纳](file/java_clean/clean.md)
