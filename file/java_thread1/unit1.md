@@ -2,7 +2,7 @@
 ## 目录
 <!-- TOC -->
 - [创建线程的三种方式](#创建线程的三种方式)
-- [wait/notify/notifyAll](#wait/notify/notifyAll)
+- [wait、notify、notifyAll](#wait、notify、notifyAll)
 - [join](#join
 - [ThreadLocal和InheritableThreadLocal](#ThreadLocal和InheritableThreadLocal)
 <!-- /TOC -->
@@ -66,7 +66,7 @@ static class CallTask implements Callable<String>{
 ---
 
 
-## wait/notify/notifyAll
+## wait、notify、notifyAll
 - 当一个前程调用一个对象的wait()方法时线程会被阻塞挂起，直到别的线程调用了同一个对象的notify()和notifyAll()方法才会唤醒，而调用这两个方法的线程也必须先获得这个对象的锁才行。
 ```
 public static void main(String[] args) throws Exception {
