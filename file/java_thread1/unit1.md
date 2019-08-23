@@ -3,7 +3,7 @@
 <!-- TOC -->
 - [创建线程的三种方式](#创建线程的三种方式)
 - [wait、notify、notifyAll](#wait、notify、notifyAll)
-- [join](#join
+- [join](#join)
 - [ThreadLocal和InheritableThreadLocal](#ThreadLocal和InheritableThreadLocal)
 <!-- /TOC -->
 
