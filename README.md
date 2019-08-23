@@ -5,8 +5,8 @@
   - Java并发
     * [Java并发编程之美 第一章 笔记](file/java_thread1/unit1.md)
 	   - 创建线程的三种方式
-	   - 等待(wait方法)和唤醒(notify和notifyAll方法)
-	   - join()方法
+	   - wait()/notify()/notifyAll()
+	   - join()
 	   - 守护线程
 	   - ThreadLocal和InheritableThreadLocal
 	* [Java并发编程之美 第二章 笔记](file/java_thread1/unit2.md)
