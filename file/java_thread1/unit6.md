@@ -1,9 +1,20 @@
-# LockSupport类
+
+## 目录
+<!-- TOC -->
+- [LockSupport类](#LockSupport类)
+  - [park()方法](#park()方法)
+  - [unPark()方法](#unPark()方法)
+  - [其他一些重载的方法](#其他一些重载的方法)
+
+<!-- /TOC -->
+
+---
+## LockSupport类
 是专门用来挂起和唤醒线程的类，它可以与使用它的线程关联起来，但是要调用特定方法才会关联，否则默认是不关联的。
 
 ---
 
-## park()方法
+### park()方法
 如果```LockSupport```和线程还没有建立关联的时候，该方法是使当前调用的线程阻塞住，只有当调用```unpark()``` 方法和```interrupt()```方法才会唤醒阻塞的线程，要注意的是因为```park()```方法而阻塞的线程被```interrupt()```中断时不会抛出异常。如果已经有关联了则不会阻塞，而是立刻返回。
 ```
 public static void test1() throws InterruptedException {
@@ -55,7 +66,7 @@ class MyThread extends Thread {
     }
 }
 ```
-## unPark()方法
+### unPark()方法
 最开始介绍了说默认情况下```LockSupport```类是不会和线程产生关联的，而调用了```unPark()```方法则会建立这种关联。并且还会让调用```park()```方法阻塞的线程立刻放回。
 ```
 public static void test1() throws InterruptedException {
@@ -68,7 +79,7 @@ public static void test1() throws InterruptedException {
 }
 ```
 
-## 其他一些重载的方法
+### 其他一些重载的方法
 - park(Object blocker)
   设置了阻塞对象，线程阻塞查看堆栈信息的时候可以看到阻塞对象是传入的```blocker```
 - parkNanos(long nanos)

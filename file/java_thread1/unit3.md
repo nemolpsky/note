@@ -1,10 +1,12 @@
-# 第三章
+## 目录
+<!-- TOC -->
+- [Random类](#Random类)
+- [ThreadLocalRandom类](#ThreadLocalRandom类)
+<!-- /TOC -->
 ---
 
-## ThreadLocalRandom类原理
-Random类在高并发情况下会有很大的性能消耗，所以新增了ThreadLocalRandom类来代替它。
-
 ## Random类
+Random类在高并发情况下使用原子类的CAS解决并发，因此会有很大的性能消耗
 - Random使用
   ```
   public static void main(String[] args) {
@@ -52,6 +54,7 @@ Random类在高并发情况下会有很大的性能消耗，所以新增了Threa
   private final AtomicLong seed;
   ```
 ## ThreadLocalRandom类
+Random类在高并发情况下会有很大的性能消耗，所以新增了ThreadLocalRandom类来代替它。
 - ThreadLocalRandom使用
   ```
   public static void main(String[] args) {
