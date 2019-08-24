@@ -5,7 +5,7 @@
   - Java并发
     * [Java并发编程之美 第一章 笔记](file/java_thread1/unit1.md)
 	   - 创建线程的三种方式
-	   - wait()/notify()/notifyAll()
+	   - 等待和唤醒
 	   - join()
 	   - 守护线程
 	   - ThreadLocal和InheritableThreadLocal
@@ -27,6 +27,12 @@
 	   - LongAccumulator
 	* [Java并发编程之美 第五章 笔记](file/java_thread1/unit5.md)
 	  - CopyOnWriteArrayList类
+	    - 构造方法
+        - add方法
+        - get方法
+        - set方法
+        - remove方法
+        - CopyOnWriteArrayList的弱一致性迭代器
 	* [Java并发编程之美 第六章 笔记](file/java_thread1/unit6.md)
 	  - LockSupport类
   - 代码规范

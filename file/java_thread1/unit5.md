@@ -2,10 +2,10 @@
 ## 目录
 <!-- TOC -->
 - [构造方法](#构造方法)
-- [add()方法](#add()方法)
-- [get()方法](#get()方法)
-- [set()方法](#set()方法)
-- [remove()方法](#remove()方法)
+- [add方法](#add方法)
+- [get方法](#get方法)
+- [set方法](#set方法)
+- [remove方法](#remove方法)
 - [CopyOnWriteArrayList的弱一致性迭代器](#CopyOnWriteArrayList的弱一致性迭代器)
 
 <!-- /TOC -->
@@ -52,7 +52,7 @@
   
 ---
 
-### add()方法
+### add方法
 ```add()```中声明了一个独占锁```lock```，整个添加操作都是被锁住的，所以同一时间只能有一个线程可以操作这个方法。首先调用了```getArray```方法，这其实就是获取那个使用```volatile```声明的```array```数组，也就是存储数值的数组。添加的时候如果超出索引会抛出异常，接着声明了一个新的数组```newElements```，然后把旧的数组里面的值都拷贝过去，然后再把新增的值添加进新数组，最后把```volatile```声明的```array```变量指向这个新数组，这就是写时复制策略。
 ```
 public void add(int index, E element) {
@@ -88,7 +88,7 @@ final Object[] getArray() {
 
 ---
 
-### get()方法
+### get方法
 ```get()```方法相对来说就是比较简单，没有加锁，获取当前```array```变量指向的那个数组，然后获取对应索引的值。但是因为```get()```方法其实是分成了两步调用，```getArray()```获取当前的数组，```get(Object[] a,int index)```获取数组中的某个值，这并不是一个原子操作，所以会有并发问题，如果A线程刚好执行完```getArray()```方法，然后B线程进来把数组里的值都清空了，接着A线程又继续执行```get(Object[] a,int index)```方法，但是因为A线程已经获取到原来旧数组，所以这个方法里面执行的还是旧数组，这就是所谓的弱一致性问题。
 ```
 public E get(int index) {
@@ -106,7 +106,7 @@ private E get(Object[] a, int index) {
 
 ---
 
-### set()方法
+### set方法
 ```set()```方法其实和add方法很像，也是加锁操作，然后复制整个数组。
 ```
 public E set(int index, E element) {
@@ -134,7 +134,7 @@ public E set(int index, E element) {
 
 ---
 
-### remove()方法
+### remove方法
 同理，```remove()```方法也是差不多的逻辑。
 ```
 public E remove(int index) {
