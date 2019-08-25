@@ -39,12 +39,13 @@ ApplicationContext是BeanFactory的子类接口，都是用于加载对象的容
       public Test test1(){
           Test test1 = new Test();
           return test1;
-  }
+      }
 
   //  相同效果的XML配置
   //  <beans>
   //    <bean id="test1" class="com.acme.services.MyServiceImpl"/>
   //  </beans>
+  }
   ```
   - @Scope，用来修改Bean的作用域 
     默认是单例模式singleton，但是可以使用@Scope("prototype")来修改。
@@ -69,67 +70,60 @@ ApplicationContext是BeanFactory的子类接口，都是用于加载对象的容
 
 - @Configuration
 
-类级别的注解，配合@Bean使用，当前类会生成一个对象放到容器中，类中所有@Bean注解的方法也会生成对象。配合@ComponentScan(basePackages = "com.example")使用可以设置包的扫描路径，此外和@Component最大的区别在于，如果同一个类中的方法接受一个对象参数，会先默认查找本来有没有加载这个类型的参数，如果有就直接使用，而@Component则是会直接新加载一个对象当参数来传递进去。
-```
-@Configuration
-public class TestClass1 {
+  类级别的注解，配合@Bean使用，当前类会生成一个对象放到容器中，类中所有@Bean注解的方法也会生成对象。配合@ComponentScan使用可以设置包的扫描路径，此外和@Component最大的区别在于，如果同一个类中的方法接受一个对象参数，会先默认查找本来有没有加载这个类型的参数，如果有就直接使用，而@Component则是会直接新加载一个对象当参数来传递进去。
+  ```
+  @Configuration
+  @ComponentScan(basePackages = "com.example")
+  public class TestClass1 {
 
-    @Bean //({"test5","test6"})
-    public Test test1(){
+      @Bean 
+      public Test test1(){
+          Test test1 = new Test();
+          return test1;
+      }
 
-//        <beans>
-//          <bean id="myService" class="com.acme.services.MyServiceImpl"/>
-//        </beans>
-
-        Test test1 = new Test();
-        System.out.println("m1-t1-" + test1);
-        return test1;
-    }
-
-    @Bean
-    public Test test2(){
-        Test test2 = new Test();
-//        System.out.println("m2-t1-" + test6);
-        System.out.println("m2-t1-" + test1());
-        System.out.println("m2-t2-" + test2);
-        return test2;
-    }
-}
-```
+      @Bean
+      public Test test2(){
+          Test test2 = new Test();
+          System.out.println("m2-t1-" + test1());
+          System.out.println("m2-t2-" + test2);
+          return test2;
+      }
+  }
+  ```
 - @Import
 
-一个@Configuration注解的类还可以直接导入引用另一个@Configuration注解的类，只要使用@Import，这样时候只需要操作一个类就可以获取到所有类中注入的对象了。
-```
-@Configuration
-public class ConfigA {
+  一个@Configuration注解的类还可以直接导入引用另一个@Configuration注解的类，只要使用@Import，这样时候只需要操作一个类就可以获取到所有类中注入的对象了。
+  ```
+  @Configuration
+  public class ConfigA {
 
-    @Bean
-    public A a() {
-        return new A();
-    }
-}
+      @Bean
+      public A a() {
+          return new A();
+      }
+  }
 
-@Configuration
-@Import(ConfigA.class)
-// 支持多个
-//@Import({ConfigA.class,ConfigC.class,ConfigD.class})
-public class ConfigB {
+  @Configuration
+  @Import(ConfigA.class)
+  // 支持多个
+  //@Import({ConfigA.class,ConfigC.class,ConfigD.class})
+  public class ConfigB {
 
-    @Bean
-    public B b() {
-        return new B();
-    }
-}
+      @Bean
+      public B b() {
+          return new B();
+      }
+  }
 
-public static void main(String[] args) {
-    ApplicationContext ctx = new AnnotationConfigApplicationContext(ConfigB.class);
+  public static void main(String[] args) {
+      ApplicationContext ctx = new AnnotationConfigApplicationContext(ConfigB.class);
 
-    // 两个类中的对象都可以直接通过一个类获取到
-    A a = ctx.getBean(A.class);
-    B b = ctx.getBean(B.class);
-}
----
-```
+      // 两个类中的对象都可以直接通过一个类获取到
+      A a = ctx.getBean(A.class);
+      B b = ctx.getBean(B.class);
+  }
+  ```
 
 - @ImportResource
 
