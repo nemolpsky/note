@@ -1,7 +1,9 @@
 # 目录
----
+
 
 ## Java
+  - Java基础
+    * [常用集合概述](file/java_base/collections.md)
   - Java并发
     * [Java并发编程之美 第一章 笔记](file/java_thread1/unit1.md)
 	   - 创建线程的三种方式
@@ -36,9 +38,12 @@
       * [Spring IoC容器](file/spring/spring1.md)
   - 常用工具类API整理
     * [常用工具类方法](file/utils/utils.md)
-  - Mysql
-    * [常用命令](file/mysql/mysql_usual_command.md)
-  - Java基础
-    * [常用集合概述](file/java_base/collections.md)
-  - 分布式
-    * [CAP定理和BASE理论](file/distributed/cap.md)
+---
+
+## 分布式
+- [CAP定理和BASE理论](file/distributed/cap.md)
+
+---
+
+## Mysql
+- [常用命令](file/mysql/mysql_usual_command.md)
