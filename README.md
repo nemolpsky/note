@@ -27,17 +27,18 @@
 	   - LongAccumulator
 	* [Java并发编程之美 第五章 笔记](file/java_thread1/unit5.md)
 	  - CopyOnWriteArrayList类
-	    - 构造方法
-        - add方法
-        - get方法
-        - set方法
-        - remove方法
-        - CopyOnWriteArrayList的弱一致性迭代器
 	* [Java并发编程之美 第六章 笔记](file/java_thread1/unit6.md)
 	  - LockSupport类
   - 代码规范
     * [代码整洁之道 重点归纳](file/java_clean/clean.md)
   - 常用框架
-    * [Spring IoC容器](file/spring/spring1.md)
+    - Spring
+      * [Spring IoC容器](file/spring/spring1.md)
   - 常用工具类API整理
     * [常用工具类方法](file/utils/utils.md)
+  - Mysql
+    * [常用命令](file/mysql/mysql_usual_command.md)
+  - Java基础
+    * [常用集合概述](file/java_base/collections.md)
+  - 分布式
+    * [CAP定理和BASE理论](file/distributed/cap.md)
