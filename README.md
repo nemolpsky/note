@@ -4,6 +4,9 @@
 ## Java
   - Java基础
     * [常用集合概述](file/java_base/collections.md)
+	* [异常体系概述](file/java_base/exception.md)
+  - Java进阶
+    * [JVM体系概念](file/java_plus/Java基础.md)
   - Java并发
     - Java并发编程之美
        * [Java并发编程之美 第一章 笔记](file/java_thread1/unit1.md)
@@ -54,3 +57,8 @@
 ## Mysql
 - [常用命令](file/mysql/mysql_usual_command.md)
 - [Mysql explain参数解析](file/mysql/mysql_explain.md)
+
+---
+
+## Nginx
+- [Nginx的基本配置和使用](file/mysql/mysql_usual_command.md)
