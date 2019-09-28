@@ -273,25 +273,36 @@ public static void main(String[] args) throws Exception {
 ## join
 A线程调用B线程的join()方法，A线程会阻塞住，等到执行B线程执行完之后才会执行A线程，而且如果这个时候执行A线程的interrupt()方法会抛出InterruptedException异常
 ```
-public static void main(String[] args) throws Exception {
-	final Thread mainThread = Thread.currentThread();
-		
+public static void main(String[] args) throws InterruptedException {
+
 	Thread thread1 = new Thread(new Runnable() {
+
 		@Override
 		public void run() {
-			System.out.println("start t1");
-				
-			mainThread.interrupt();
-				
-			for(int i=0;i<10;i++) {
-				System.out.println(i);
+			try {
+				System.out.println("1 start");
+				TimeUnit.SECONDS.sleep(1);
+				System.out.println("1 end");
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 	});
-	thread1.setName("生产");
 	thread1.start();
+	
+	// 主线程调用的thread1.join()，所以在thread执行完，主线程会被阻塞住
+	thread1.join();
+	
+	Thread thread2 = new Thread(new Runnable() {
 
-	Thread.currentThread().sleep(20000);
+		@Override
+		public void run() {
+			System.out.println("2 start");
+			System.out.println("2 end");
+		}
+	});
+	thread2.start();
+
 }
 ```
 
