@@ -5,6 +5,7 @@
   - Java基础
     * [常用集合概述](file/java_base/collections.md)
 	* [异常体系概述](file/java_base/exception.md)
+	* [四种字符串拼接](file/java_base/string_append_performance.md)
   - Java进阶
     * [JVM体系概念](file/java_plus/JVM.md)
   - Java并发
