@@ -26,7 +26,7 @@ Mysql底层是使用B+树来实现，上一篇文章介绍了二叉搜索树、B
 
    整个数据库存储其实是分为三层，InnoDB引擎层，文件系统层和磁盘扇区层，数据其实都存在磁盘中，再读取到文件系统层最后再读取到InnoDB引擎层。这里稍微介绍一下，在计算机中磁盘存储数据最小单元是扇区，一个扇区的大小是512字节，而文件系统(例如XFS/EXT4)他的最小单元是块，一个块的大小是4k，而对于我们的InnoDB存储引擎也有自己的最小储存单元-页(Page)，一个页的大小是16K(可以设置)，下面是一个只有一个字符的txt文档和数据库的数据文件(后缀为ibd的文件)，可以看到文档占用空间是4K，数据文件也全都是16K的倍数。
 
-   ![存储结构](https://github.com/nemolpsky/Note/raw/master/file/mysql/image/mysql_tree4.png)
+   ![存储结构](https://github.com/nemolpsky/Note/raw/master/file/mysql/image/mysql_tree4.jpg)
    ![存储结构](https://github.com/nemolpsky/Note/raw/master/file/mysql/image/mysql_tree5.png)
    ![存储结构](https://github.com/nemolpsky/Note/raw/master/file/mysql/image/mysql_tree6.png)
 
