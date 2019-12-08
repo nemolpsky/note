@@ -58,7 +58,10 @@
 ## Mysql
 - [常用命令](file/mysql/mysql_usual_command.md)
 - [Mysql explain参数解析](file/mysql/mysql_explain.md)
-
+- [Mysql索引基础](file/mysql/mysql_index1.md)
+- [Mysql索引进阶](file/mysql/mysql_index2.md)
+- [Mysql优化](file/mysql/mysql_optimize.md)
+- [Mysql优化](file/mysql/mysql_tree.md)
 ---
 
 ## Nginx
