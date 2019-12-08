@@ -9,26 +9,26 @@ Mysql底层是使用B+树来实现，上一篇文章介绍了二叉搜索树、B
 
      聚簇索引是在InnoDB引擎下为主键建立的索引，没有主键则会默认隐式的建立一个，假设一个表里面有id、name和age三个字段，存储结构大致上就是下面这张图的形式，B+树结构，数据全都存储在叶子节点中。
 
-     ![聚簇索引](https://github.com/nemolpsky/Note/raw/master/file/mysql/image/tree1.png)
+     ![聚簇索引](https://github.com/nemolpsky/Note/raw/master/file/mysql/image/mysql_tree1.png)
 
 
    - 非聚簇索引
 
      非聚簇索引也叫做二级索引，比如单独为name字段建立索引，也是会建立一个B+树结构的索引，但是键全都是name字段，叶子节点存储的数据反而是id，也就是主键，所以非聚簇索引查询是先根据字段值查找到主键id，然后再拿这个主键id聚簇索引上查询所有数据，这也就是回表查询，
 
-     ![非聚簇索引](https://github.com/nemolpsky/Note/raw/master/file/mysql/image/tree2.png)
+     ![非聚簇索引](https://github.com/nemolpsky/Note/raw/master/file/mysql/image/mysql_tree2.png)
 
      下面这张图是建立一个联合索引，包含name和age字段，和上面的单个索引很像，只不过键是存储了多个字段。
 
-     ![非聚簇索引](https://github.com/nemolpsky/Note/raw/master/file/mysql/image/tree3.png)
+     ![非聚簇索引](https://github.com/nemolpsky/Note/raw/master/file/mysql/image/mysql_tree3.png)
 
 2. 数据库存储结构
 
    整个数据库存储其实是分为三层，InnoDB引擎层，文件系统层和磁盘扇区层，数据其实都存在磁盘中，再读取到文件系统层最后再读取到InnoDB引擎层。这里稍微介绍一下，在计算机中磁盘存储数据最小单元是扇区，一个扇区的大小是512字节，而文件系统(例如XFS/EXT4)他的最小单元是块，一个块的大小是4k，而对于我们的InnoDB存储引擎也有自己的最小储存单元-页(Page)，一个页的大小是16K(可以设置)，下面是一个只有一个字符的txt文档和数据库的数据文件(后缀为ibd的文件)，可以看到文档占用空间是4K，数据文件也全都是16K的倍数。
 
-   ![存储结构](https://github.com/nemolpsky/Note/raw/master/file/mysql/image/tree4.png)
-   ![存储结构](https://github.com/nemolpsky/Note/raw/master/file/mysql/image/tree5.png)
-   ![存储结构](https://github.com/nemolpsky/Note/raw/master/file/mysql/image/tree6.png)
+   ![存储结构](https://github.com/nemolpsky/Note/raw/master/file/mysql/image/mysql_tree4.png)
+   ![存储结构](https://github.com/nemolpsky/Note/raw/master/file/mysql/image/mysql_tree5.png)
+   ![存储结构](https://github.com/nemolpsky/Note/raw/master/file/mysql/image/mysql_tree6.png)
 
 3. B+树存储数据量
 

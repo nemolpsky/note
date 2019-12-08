@@ -61,7 +61,7 @@
 - [Mysql索引基础](file/mysql/mysql_index1.md)
 - [Mysql索引进阶](file/mysql/mysql_index2.md)
 - [Mysql优化](file/mysql/mysql_optimize.md)
-- [Mysql优化](file/mysql/mysql_tree.md)
+- [Mysql底层原理](file/mysql/mysql_tree.md)
 ---
 
 ## Nginx
