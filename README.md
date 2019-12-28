@@ -3,11 +3,19 @@
 
 ## Java
   - Java基础
-    * [常用集合概述](file/java_base/collections.md)
 	* [异常体系概述](file/java_base/exception.md)
 	* [四种字符串拼接](file/java_base/string_append_performance.md)
-  - Java进阶
-    * [JVM体系概念](file/java_plus/JVM.md)
+  - Java集合系列
+    * [常用集合概述](file/java_base/collections.md)
+    * [ArrayList底层原理](file/java_plus/collections/arraylist.md)
+	* [LinkedList底层原理](file/java_plus/collections/linkedlist.md)
+	* [HashMap底层原理](file/java_plus/collections/hashmap.md)
+	* [ConcurrentHashMap底层原理](file/java_plus/collections/concurrenthashmap.md)
+	* [LinkedHashMap底层原理](file/java_plus/collections/linkedhashmap.md)
+	* [TreeMap底层原理](file/java_plus/collections/treemap.md)
+	* [HashSet底层原理](file/java_plus/collections/hashset.md)
+	* [LinkedHashSet底层原理](file/java_plus/collections/linkedhashset.md)
+	* [TreeSet底层原理](file/java_plus/collections/treeset.md)
   - Java并发
     - Java并发编程之美
        * [Java并发编程之美 第一章 笔记](file/java_thread1/unit1.md)
@@ -41,6 +49,8 @@
 	    - [CountDownLatch原理](file/java_thread1/CountDownLatch.md)
 	- 线程池
 	  - [线程池详解](file/java_thread1/ThreadPoolExecutor.md)
+  - JVM
+    * [JVM体系概念](file/java_plus/JVM.md)
   - 代码规范
     * [代码整洁之道 重点归纳](file/java_clean/clean.md)
   - 常用框架
