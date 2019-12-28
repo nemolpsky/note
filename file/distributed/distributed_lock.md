@@ -107,7 +107,7 @@
 
    - 流程图
      
-     ![distributed_lock](https://github.com/nemolpsky/note/raw/master/file/distributed/images/distributed_lock.png)
+     ![distributed_lock](https://github.com/nemolpsky/note/raw/master/file/distributed/images/distributed_lock.jpg)
 
    - 代码实现
 
