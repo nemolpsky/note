@@ -49,6 +49,8 @@
 	    - [CountDownLatch原理](file/java_thread1/CountDownLatch.md)
 	- 线程池
 	  - [线程池详解](file/java_thread1/ThreadPoolExecutor.md)
+	- Java锁
+	  - [Synchronized关键字和锁升级](file/java_thread1/synchronized.md)
   - JVM
     * [JVM体系概念](file/java_plus/JVM.md)
   - 代码规范
@@ -56,6 +58,9 @@
   - 常用框架
     - Spring
       * [Spring IoC容器](file/spring/spring1.md)
+	- SpringBoot
+	  * [SpringBoot启动类run()底层原理](file/spring/springboot1.md)
+	  * [SpringBoot的starter机制和自动配置原理](file/spring/springboot2.md)
   - 常用工具类API整理
     * [常用工具类方法](file/utils/utils.md)
 ---
@@ -73,6 +78,7 @@
 - [Mysql索引进阶](file/mysql/mysql_index2.md)
 - [Mysql优化](file/mysql/mysql_optimize.md)
 - [Mysql底层原理](file/mysql/mysql_tree.md)
+- [Mysql锁问题](file/mysql/mysql_lock.md)
 ---
 
 ## Nginx
