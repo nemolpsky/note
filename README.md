@@ -5,6 +5,7 @@
   - Java基础
 	* [异常体系概述](file/java_base/exception.md)
 	* [四种字符串拼接](file/java_base/string_append_performance.md)
+	* [Java队列介绍使用](file/java_base/queue.md)
   - Java集合系列
     * [常用集合概述](file/java_base/collections.md)
     * [ArrayList底层原理](file/java_plus/collections/arraylist.md)
