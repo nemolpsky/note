@@ -3,7 +3,7 @@
 
 ### 启动类
 
-  一般SpringBoot项目的启动类就是一个@SpringBootApplication注解，加上一个main方法，调用SpringApplication的run()方法，把启动类的类文件当做参数传递进去。
+  一般```SpringBoot```项目的启动类就是一个```@SpringBootApplication```注解，加上一个```main()```方法，调用```SpringApplication```的```run()```方法，把启动类的类文件当做参数传递进去。
 
   ```
   @SpringBootApplication
@@ -93,7 +93,7 @@
 
 ### SpringApplication类的run方法
 
-  启动类是要调用SpringApplication.run()方法才会启动SpringBoot。
+  启动类是要调用```SpringApplication.run()```方法才会启动```SpringBoot```。
 
   ```
     public ConfigurableApplicationContext run(String... args) {
@@ -232,19 +232,19 @@
 ---
 
 ### 总结
-SpringBoot启动会做两件事，第一件事就是初始化SpringApplication，第二步则是调用SpringApplication.run()方法。
+```SpringBoot```启动会做两件事，第一件事就是初始化```SpringApplication```，第二步则是调用```SpringApplication.run()```方法。
 
 - 初始化
 
-  - 在run()方法中接受的参数添加到SpringApplication的中的一个LinkedHashSet集合中
-  - 判断是否是web程序，并设置到webEnvironment这个boolean属性中
-  - 找出所有的初始化器，默认有5个，设置到initializers属性中
-  - 找出所有的应用程序监听器，默认有9个，设置到listeners属性中
-  - 找出运行main()方法的启动类
+  - 在```run()```方法中接受的参数添加到```SpringApplication```的中的一个```LinkedHashSet```集合中
+  - 判断是否是```web```程序，并设置到```webEnvironment```这个```boolean```属性中
+  - 找出所有的初始化器，默认有5个，设置到```initializers```属性中
+  - 找出所有的应用程序监听器，默认有9个，设置到```listeners```属性中
+  - 找出运行```main()```方法的启动类
 
 - run()方法
 
-  - 构造一个StopWatch，记录SpringApplication的执行
-  - 找出所有监听run()方法的SpringApplicationRunListener类来开启监听
-  - 初始化并刷新Spring容器
-  - 在Spring容器中找出ApplicationRunner和CommandLineRunner接口的实现类排序再依次执行。
+  - 构造一个```StopWatch```，记录```SpringApplication```的执行
+  - 找出所有监听```run()```方法的```SpringApplicationRunListener```类来开启监听
+  - 初始化并刷新```Spring```容器
+  - 在```Spring```容器中找出```ApplicationRunner```和```CommandLineRunner```接口的实现类排序再依次执行。

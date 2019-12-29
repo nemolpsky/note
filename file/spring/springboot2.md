@@ -1,11 +1,11 @@
 ## SpringBoot的starter机制和自动配置原理
 
-SpringBoot相比于Spring最大的好处就是一些固定配置模板无需配置，只需要根据所需要的功能来添加相关的starter依赖即可，而且还内置了tomcat等容器，真正的坐到了开箱即用，大大的提高了效率，只需要单独配置自己需要修改的个性化配置即可，这篇文章就来了解下SpringBoot的starter机制和自动配置的原理。
+```SpringBoot```相比于```Spring```最大的好处就是一些固定配置模板无需配置，只需要根据所需要的功能来添加相关的```starter```依赖即可，而且还内置了```tomcat```等容器，真正的坐到了开箱即用，大大的提高了效率，只需要单独配置自己需要修改的个性化配置即可，这篇文章就来了解下```SpringBoot```的```starter```机制和自动配置的原理。
 
 
 1. starter依赖
 
-   SpringBoot官方提供了很多依赖，用于集成各种各样的框架，而SpringBoot的依赖都是以starter结尾，官方的是spring-boot-starter-xxx格式，而第三方则是xxx-spring-boot-starter格式，下面就以Mybtais的依赖作为说明例子，在pom文件中添加Mybtais的依赖。
+   ```SpringBoot```官方提供了很多依赖，用于集成各种各样的框架，而```SpringBoot```的依赖都是以```starter```结尾，官方的是```spring-boot-starter-xxx```格式，而第三方则是```xxx-spring-boot-starter```格式，下面就以```Mybtais```的依赖作为说明例子，在```pom```文件中添加```Mybtais```的依赖。
 
    ```
     <dependency>
@@ -15,7 +15,7 @@ SpringBoot相比于Spring最大的好处就是一些固定配置模板无需配�
     </dependency>
    ```
 
-   可以查看下载到本地的依赖的jar包，会发现里面的META-INF文件夹下，只有一个pom文件和一个配置文件，所以其实就是直接把所有需要的依赖都整合成一个依赖，直接引入即可。
+   可以查看下载到本地的依赖的```jar```包，会发现里面的```META-INF```文件夹下，只有一个```pom```文件和一个配置文件，所以其实就是直接把所有需要的依赖都整合成一个依赖，直接引入即可。
 
    ```
    <?xml version="1.0" encoding="UTF-8"?>
@@ -56,7 +56,7 @@ SpringBoot相比于Spring最大的好处就是一些固定配置模板无需配�
 
 2. 自动装配
 
-   如果有使用过Spring来配置Mybatis的话都知道会需要配置数据源诸如此类的一大堆东西，那为什么使用starter依赖后就不会呢，其实主要关键的地方就在```mybatis-spring-boot-autoconfigure```这个依赖中，打开```MybatisAutoConfiguration这个类```，可以看到有```@Configuration```和```@Bean```注解来创建```sqlSessionFactory```等对象，所以不需要手动创建了。
+   如果有使用过```Spring```来配置```Mybatis```的话都知道会需要配置数据源诸如此类的一大堆东西，那为什么使用```starter```依赖后就不会呢，其实主要关键的地方就在```mybatis-spring-boot-autoconfigure```这个依赖中，打开```MybatisAutoConfiguration这个类```，可以看到有```@Configuration```和```@Bean```注解来创建```sqlSessionFactory```等对象，所以不需要手动创建了。
 
 
    ```
@@ -124,7 +124,7 @@ SpringBoot相比于Spring最大的好处就是一些固定配置模板无需配�
     }
    ```
 
-   还可以看到这个类使用了很多其他的注解，来保证在加载这个类里面的Bean之前前置的Bean是否有加载。
+   还可以看到这个类使用了很多其他的注解，来保证在加载这个类里面的```Bean```之前前置的```Bean```是否有加载。
 
    ```
 
@@ -141,7 +141,7 @@ SpringBoot相比于Spring最大的好处就是一些固定配置模板无需配�
    }
    ```
 
-   再看```DataSourceAutoConfiguration```这个类，是```MybatisAutoConfiguration```加载前要先创建的一个类，它使用了一个```@EnableConfigurationProperties```注解，这个注解是配合```@ConfigurationProperties```注解使用，将yml或者properties文件转化为bean，```@ConfigurationProperties```是定义了配置文件中的各种key，所以如果添加了个性化的配置，也会生效。
+   再看```DataSourceAutoConfiguration```这个类，是```MybatisAutoConfiguration```加载前要先创建的一个类，它使用了一个```@EnableConfigurationProperties```注解，这个注解是配合```@ConfigurationProperties```注解使用，将yml或者properties文件转化为bean，```@ConfigurationProperties```是定义了配置文件中的各种```key```，所以如果添加了个性化的配置，也会生效。
 
    ```
    @Configuration

@@ -5,7 +5,7 @@
    - Java对象都是存放在堆内存中，而对象大致可以分为下列三个部分，所以锁的信息都存放在对象头中。
      - 对象头
 
-       专门使用一些指针来存放各种对象类型信息，比如对象的hasCode，分代年龄，锁的状态等。
+       专门使用一些指针来存放各种对象类型信息，比如对象的```hasCode```，分代年龄，锁的状态等。
 
        ![32位](https://github.com/nemolpsky/Note/raw/master/file/java_thread1/images/synchronized1.png)
        ![64位](https://github.com/nemolpsky/Note/raw/master/file/java_thread1/images/synchronized2.png)
@@ -20,13 +20,13 @@
 
    - monitor
 
-     每个对象都有一个与之关联的monitor，而当一个monitor被某个线程持有后，就表示这个线程获取了这个对象锁，也就是锁定住了。
+     每个对象都有一个与之关联的```monitor```，而当一个```monitor```被某个线程持有后，就表示这个线程获取了这个对象锁，也就是锁定住了。
 
-     在HotSpot虚拟机中的实现中(位于HotSpot虚拟机源码ObjectMonitor.hpp文件)，是有两个队列，分别是_WaitSet和_EntryList队列，保存的类型是ObjectWaiter，_owner指针则是指向了拥有锁的线程，也就是线程类型，有多个线程访问的时候会把所有线程放入_EntryList队列，当某个而线程获取monitor后会把_owner指向当前线程，然后把monitor中的计数器加1，释放锁则把_owner置为null，并且把计数器减1，如果是调用了wait()方法，还会把线程放入_WaitSet队列中等待唤醒。
+     在```HotSpot```虚拟机中的实现中(位于```HotSpot```虚拟机源码```ObjectMonitor.hpp```文件)，是有两个队列，分别是```_WaitSet```和```_EntryList```队列，保存的类型是```ObjectWaiter```，```_owner```指针则是指向了拥有锁的线程，也就是线程类型，有多个线程访问的时候会把所有线程放入```_EntryList```队列，当某个而线程获取```monitor```后会把```_owner```指向当前线程，然后把```monitor```中的计数器加1，释放锁则把```_owner```置为```null```，并且把计数器减1，如果是调用了```wait()```方法，还会把线程放入```_WaitSet```队列中等待唤醒。
 
 2. 锁升级
 
-   看上面的两张对象头的图，会发现有三种不同类型的锁状态，这是在JDK1.6版本中引入的对synchronized锁的优化，要注意的是锁只能向上升级，也就是偏向锁->轻量锁->重量锁。
+   看上面的两张对象头的图，会发现有三种不同类型的锁状态，这是在JDK1.6版本中引入的对```synchronized```锁的优化，要注意的是锁只能向上升级，也就是偏向锁->轻量锁->重量锁。
 
    ![锁类型](https://github.com/nemolpsky/Note/raw/master/file/java_thread1/images/synchronized3.png)
 
