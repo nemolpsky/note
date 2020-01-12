@@ -19,35 +19,18 @@
 	* [TreeSet底层原理](file/java_plus/collections/treeset.md)
   - Java并发
     - Java并发编程之美
-       * [Java并发编程之美 第一章 笔记](file/java_thread1/unit1.md)
-	     - 创建线程的三种方式
-	     - 等待和唤醒
-	     - join()
-	     - 守护线程
-	     - ThreadLocal和InheritableThreadLocal
+      * [Java并发编程之美 第一章 笔记](file/java_thread1/unit1.md)
+	    - [创建线程的三种方式/等待和唤醒/join()/守护线程/ThreadLocal和InheritableThreadLocal]
 	  * [Java并发编程之美 第二章 笔记](file/java_thread1/unit2.md)
-	     - 线程安全问题
-	     - 共享变量内存可见性问题
-	     - synchronized
-	     - volatile
-	     - Unsafe类
-	     - Java指令重排序
-	     - 伪共享
-	     - 锁的类型
+	    - [线程安全问题/共享变量内存可见性问题/synchronized/volatile/Unsafe类/Java指令重排序/伪共享/锁的类型]
 	  * [Java并发编程之美 第三章 笔记](file/java_thread1/unit3.md)
-	     - Random类
-         - ThreadLocalRandom类
+	    - [Random类/ThreadLocalRandom类]
 	  * [Java并发编程之美 第四章 笔记](file/java_thread1/unit4.md)
-	     - 原子操作类
-	     - LongAddr类
-	     - LongAccumulator
+	    - [原子操作类/LongAddr类/LongAccumulator]
 	  * [Java并发编程之美 第五章 笔记](file/java_thread1/unit5.md)
-	    - CopyOnWriteArrayList类
+	    - [CopyOnWriteArrayList类]
 	  * [Java并发编程之美 第六章 笔记](file/java_thread1/unit6.md)
-	    - LockSupport类
-	    - [AQS原理](file/java_thread1/AQS.md)
-	    - [ReentrantLock原理](file/java_thread1/ReentrantLock.md)
-	    - [CountDownLatch原理](file/java_thread1/CountDownLatch.md)
+	    - [LockSupport类/[AQS原理](file/java_thread1/AQS.md)/[ReentrantLock原理](file/java_thread1/ReentrantLock.md)/[CountDownLatch原理](file/java_thread1/CountDownLatch.md)]
 	- 线程池
 	  - [线程池详解](file/java_thread1/ThreadPoolExecutor.md)
 	- Java锁
@@ -64,6 +47,10 @@
 	  * [SpringBoot的starter机制和自动配置原理](file/spring/springboot2.md)
   - 常用工具类API整理
     * [常用工具类方法](file/utils/utils.md)
+  - IO
+    - [bio和nio介绍](file/io/io.md)
+	- [bio详解](file/io/bio.md)
+	- [nio详解](file/io/nio.md)
 ---
 
 ## 分布式
@@ -84,3 +71,5 @@
 
 ## Nginx
 - [Nginx的基本配置和使用](file/mysql/mysql_usual_command.md)
+
+   
