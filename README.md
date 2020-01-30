@@ -3,6 +3,7 @@
 
 ## Java
   - Java基础
+    * [Java底层基础](file/java_base/exception.md)
 	* [异常体系概述](file/java_base/exception.md)
 	* [四种字符串拼接](file/java_base/string_append_performance.md)
 	* [Java队列介绍使用](file/java_base/queue.md)
@@ -20,7 +21,7 @@
   - Java并发
     - Java并发编程之美
       * [Java并发编程之美 第一章 笔记](file/java_thread1/unit1.md)
-	    - [创建线程的三种方式/等待和唤醒/join()/守护线程/ThreadLocal和InheritableThreadLocal]
+	    - [创建线程的三种方式/等待和唤醒/join()/守护线程/ThreadLocal和InheritableThreadLocal/[ThreadLocal底层原理](file/java_thread1/ThreadLocal.md)]
 	  * [Java并发编程之美 第二章 笔记](file/java_thread1/unit2.md)
 	    - [线程安全问题/共享变量内存可见性问题/synchronized/volatile/Unsafe类/Java指令重排序/伪共享/锁的类型]
 	  * [Java并发编程之美 第三章 笔记](file/java_thread1/unit3.md)
@@ -35,13 +36,17 @@
 	  - [线程池详解](file/java_thread1/ThreadPoolExecutor.md)
 	- Java锁
 	  - [Synchronized关键字和锁升级](file/java_thread1/synchronized.md)
+	  - [ReentrantLock配合Condition](file/java_thread1/ReentrantLock2.md)
   - JVM
     * [JVM体系概念](file/java_plus/JVM.md)
   - 代码规范
     * [代码整洁之道 重点归纳](file/java_clean/clean.md)
   - 常用框架
     - Spring
+	  * [Spring基本概念](file/spring/spring1.md)
       * [Spring IoC容器](file/spring/spring1.md)
+	  * [Spring常用注解](file/spring/spring1.md)
+	  * [Spring常用功能实现](file/spring/spring1.md)
 	- SpringBoot
 	  * [SpringBoot启动类run()底层原理](file/spring/springboot1.md)
 	  * [SpringBoot的starter机制和自动配置原理](file/spring/springboot2.md)
