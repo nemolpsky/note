@@ -33,7 +33,8 @@
 	  * [Java并发编程之美 第六章 笔记](file/java_thread1/unit6.md)
 	    - [LockSupport类/[AQS原理](file/java_thread1/AQS.md)/[ReentrantLock原理](file/java_thread1/ReentrantLock.md)/[CountDownLatch原理](file/java_thread1/CountDownLatch.md)]
 	- 线程池
-	  - [线程池详解](file/java_thread1/ThreadPoolExecutor.md)
+	  - [Executors提供的常用线程池介绍](file/java_thread1/ThreadPool_base.md)
+	  - [自定义线程池详解](file/java_thread1/ThreadPoolExecutor.md)
 	- Java锁
 	  - [Synchronized关键字和锁升级](file/java_thread1/synchronized.md)
 	  - [ReentrantLock配合Condition](file/java_thread1/ReentrantLock2.md)
