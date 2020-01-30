@@ -1,4 +1,4 @@
-## List、Set和Map的区别？
+## List、Set和Map的区别
 - List是保证取出的顺序是和存入顺序一致的，而且允许有重复元素
 - Set则是保证了元素的唯一性
 - Map则是使用key-value的形式来维护数据
