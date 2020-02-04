@@ -319,6 +319,6 @@
 
 - 初始化的时候不指定大小时，只有在添加第一个元素时才会真正的创建底层数组。
 - ```add()/set(int index, E element)/get(int index)/size()```方法的时间复杂度都是O(1)，因为不需要copy移动数组。
-- ```add(int index, E element)/remove(int index)/addAll(int index, Collection<? extends E> c)/addAll(Collection<? extends E> c)/indexOf()/contains()```方法的时间复杂度是O(n)，因为都需要copy移动数组。
+- ```add(int index, E element)/remove(int index)/addAll(int index, Collection<? extends E> c)/addAll(Collection<? extends E> c)```的时间复杂度是O(n)，因为都需要copy移动数组，而```indexOf()/contains()```方法则是需要遍历寻找，时间复杂度也是O(n)。
 - 每次扩容都会扩容到旧长度的1.5倍，再copy旧数组的值到新数组中。
 - 内部实现了```ListIterator```接口，有着功能更强大的迭代器。
