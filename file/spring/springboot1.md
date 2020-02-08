@@ -72,22 +72,22 @@
 
     一般情况下会初始化出下列5个应用程序初始化器和9个应用程序监听器
     - 应用程序初始化器
-    - org.springframework.boot.context.config.DelegatingApplicationContextInitializer
-    - org.springframework.boot.context.ContextIdApplicationContextInitializer
-    - org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer
-    - org.springframework.boot.context.web.ServerPortInfoApplicationContextInitializer
-    - org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer
+      - org.springframework.boot.context.config.DelegatingApplicationContextInitializer
+      - org.springframework.boot.context.ContextIdApplicationContextInitializer
+      - org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer
+      - org.springframework.boot.context.web.ServerPortInfoApplicationContextInitializer
+      - org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer
 
     - 应用程序监听器
-    - org.springframework.boot.context.config.ConfigFileApplicationListener
-    - org.springframework.boot.context.config.AnsiOutputApplicationListener
-    - org.springframework.boot.logging.LoggingApplicationListener
-    - org.springframework.boot.logging.ClasspathLoggingApplicationListener
-    - org.springframework.boot.autoconfigure.BackgroundPreinitializer
-    - org.springframework.boot.context.config.DelegatingApplicationListener
-    - org.springframework.boot.builder.ParentContextCloserApplicationListener
-    - org.springframework.boot.context.FileEncodingApplicationListener
-    - org.springframework.boot.liquibase.LiquibaseServiceLocatorApplicationListener
+      - org.springframework.boot.context.config.ConfigFileApplicationListener
+      - org.springframework.boot.context.config.AnsiOutputApplicationListener
+      - org.springframework.boot.logging.LoggingApplicationListener
+      - org.springframework.boot.logging.ClasspathLoggingApplicationListener
+      - org.springframework.boot.autoconfigure.BackgroundPreinitializer
+      - org.springframework.boot.context.config.DelegatingApplicationListener
+      - org.springframework.boot.builder.ParentContextCloserApplicationListener
+      - org.springframework.boot.context.FileEncodingApplicationListener
+      - org.springframework.boot.liquibase.LiquibaseServiceLocatorApplicationListener
 
 ---
 
