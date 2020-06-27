@@ -86,3 +86,4 @@
 ## Linux
 - [Linux用户体系](file/linux/Linux用户体系.md) 
 - [Linux权限体系](file/linux/Linux权限体系.md)
+- [systemctl命令](file/linux/systemctl.md)
