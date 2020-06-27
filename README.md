@@ -78,8 +78,11 @@
 ## Nginx
 - [Nginx的基本配置和使用](file/mysql/mysql_usual_command.md)
 
+---
 
 ## Git
 - [IEDA配合Git的基本使用](file/git/Git基本使用.md)
 
-   
+## Linux
+- [Linux用户体系](file/linux/Linux用户体系.md) 
+- [Linux权限体系](file/linux/Linux权限体系.md)
