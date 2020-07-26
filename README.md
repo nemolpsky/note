@@ -94,3 +94,4 @@
 
 ## HTTP
 - [HTTP请求和TCP握手](file/http/HTTP请求和TCP握手1.md)
+- [网络基础知识(IP、子网掩码和DNS解析)](file/http/网络基础知识2.md)
