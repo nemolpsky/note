@@ -40,7 +40,7 @@
 	  - [ReentrantLock配合Condition](file/java_thread1/ReentrantLock2.md)
   - JVM
     * [JVM内存区域](file/jvm/jvm_memory.md)
-	* [Class文件介绍](file/jvm/java_class.md)
+	* [Class文件介绍](file/jvm/jvm_class.md)
   - 代码规范
     * [代码整洁之道 重点归纳](file/java_clean/clean.md)
   - 常用框架
