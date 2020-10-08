@@ -22,7 +22,7 @@
 ### 2. Class文件格式
 下面这张图就是```Class```文件的格式，看上去有很多无符号数和表，其实理解为一个XML文件中的各种标签即可，不同的无符号数和表有着不同的作用，每个无符号数和表都有不同的值，不同的值则代表不同的含义属性。
 
-![Class](https://github.com/nemolpsky/note/raw/master/file/jvm/jvm_class/1.png)
+![Class](https://github.com/nemolpsky/note/blob/master/file/jvm/jvm_class/1.png)
 
 从上到下依次顺序分别是：
 - 魔数
