@@ -5,21 +5,21 @@
 
 #### 1. 发送方式
 
-    第一种最简单，发后即忘，不关心发送成功没有，性能最好。
-    ```
-    kafkaTemplate.send(topic,user);
-    ```
+第一种最简单，发后即忘，不关心发送成功没有，性能最好。
+```
+kafkaTemplate.send(topic,user);
+```
 
-    第二种是同步方式，ListenableFuture实现了Future接口，发送完会一直阻塞知道返回一个成功的请求数据，性能最差。
-    ```
-    ListenableFuture<SendResult> listenableFuture = kafkaTemplate.send(topic,user);
-    SendResult sendResult = listenableFuture.get();
-    logger.info(sendResult.toString());
-    ```
+第二种是同步方式，ListenableFuture实现了Future接口，发送完会一直阻塞知道返回一个成功的请求数据，性能最差。
+```
+ListenableFuture<SendResult> listenableFuture = kafkaTemplate.send(topic,user);
+SendResult sendResult = listenableFuture.get();
+logger.info(sendResult.toString());
+```
 
-    第三种是异步方式，成功或失败会调用对应的回调接口，下面两种方式都可以。
-    ```
-    listenableFuture.addCallback(new SuccessCallback<SendResult>() {
+第三种是异步方式，成功或失败会调用对应的回调接口，下面两种方式都可以。
+```
+listenableFuture.addCallback(new SuccessCallback<SendResult>() {
                 @Override
                 public void onSuccess(SendResult sendResult) {
                     logger.info("send success");
@@ -29,9 +29,9 @@
                 public void onFailure(Throwable throwable) {
                     logger.info("send failure");
                 }
-    });
+});
 
-    listenableFuture.addCallback(new ListenableFutureCallback<SendResult>() {
+listenableFuture.addCallback(new ListenableFutureCallback<SendResult>() {
                 @Override
                 public void onFailure(Throwable throwable) {
                     logger.info("send failure");
@@ -41,97 +41,99 @@
                 public void onSuccess(SendResult sendResult) {
                     logger.info("send success");
                 }
-    });
-    ```
+});
+```
 
-    可以配置重试机制，发送失败了就重试指定次数，注意的是Kafka里面会有两类异常，第一类是网络异常之类的，这个时候会进行重试，因为可能下一次发送网络已经恢复，第二次是例如发送消息过大的异常，这种不会重试，重试也没有用。
-    ```
-    spring:
-        kafka:
-            producer:
-                retries: 10
-    ```
+可以配置重试机制，发送失败了就重试指定次数，注意的是Kafka里面会有两类异常，第一类是网络异常之类的，这个时候会进行重试，因为可能下一次发送网络已经恢复，第二次是例如发送消息过大的异常，这种不会重试，重试也没有用。
+```
+spring:
+    kafka:
+        producer:
+            retries: 10
+```
 
 ---
 
 #### 2. 序列化
 
-    发送的时候需要把key和value都进行序列化成字节数组才能发送，可以在配置文件配置，也可以在代码中配置。
+发送的时候需要把key和value都进行序列化成字节数组才能发送，可以在配置文件配置，也可以在代码中配置。
 
-    ```
-    spring:
-        kafka:
-            producer:
-                value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-    ```
-    ```
-    @Configuration
-    public class SerializerConfig {
+```
+spring:
+    kafka:
+        producer:
+            value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+```
+```
+@Configuration
+public class SerializerConfig {
 
-        @Bean
-        public DefaultKafkaProducerFactory pf(KafkaProperties properties) {
-            Map<String, Object> props = properties.buildProducerProperties();
-            DefaultKafkaProducerFactory pf = new DefaultKafkaProducerFactory(props,new JsonSerializer(),new JsonSerializer());
-            return pf;
-        }
+    @Bean
+    public DefaultKafkaProducerFactory pf(KafkaProperties properties) {
+        Map<String, Object> props = properties.buildProducerProperties();
+        DefaultKafkaProducerFactory pf = new DefaultKafkaProducerFactory(props,new JsonSerializer(),new JsonSerializer());
+        return pf;
     }
-    ```
+}
+```
 ---
 
 #### 3. 分区
 
-    在发送消息的时候，如果指定了分区，那就会发送给指定的分区，但是如果没有指定分区，并且key也不为空，则会根据key进行哈希计算，确定发送到哪个分区。如果key为null则会以轮询的方式发送给主题内各个可用分区。
+在发送消息的时候，如果指定了分区，那就会发送给指定的分区，但是如果没有指定分区，并且key也不为空，则会根据key进行哈希计算，确定发送到哪个分区。如果key为null则会以轮询的方式发送给主题内各个可用分区。
+
+Kafka默认的分区策略是，尽量均匀的分布在所有分区，还有其他策略可以选择，或者自定义分区策略。
 
 ---
 
 #### 4. 拦截器
 
-    Kafka也支持设置拦截器，不过安装Spring的官方文档介绍，拦截器没法使用Spring注入，只能换个思路，自己创建生产者的工厂覆盖默认的，然后添加拦截器。比如修改下上面序列换配置的代码，添加拦截器。
+Kafka也支持设置拦截器，不过安装Spring的官方文档介绍，拦截器没法使用Spring注入，只能换个思路，自己创建生产者的工厂覆盖默认的，然后添加拦截器。比如修改下上面序列换配置的代码，添加拦截器。
 
-    ```
-    @Configuration
-    public class SerializerConfig {
+```
+@Configuration
+public class SerializerConfig {
 
-        @Bean
-        public DefaultKafkaProducerFactory factory(KafkaProperties properties) {
-            Map<String, Object> producerProperties = properties.buildProducerProperties();
-            // 添加拦截器
-            producerProperties.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, CustomProducerInterceptor.class.getName());
-            DefaultKafkaProducerFactory<?, ?> factory = new DefaultKafkaProducerFactory<>(producerProperties,new JsonSerializer(),new JsonSerializer());
-            String transactionIdPrefix = properties.getProducer().getTransactionIdPrefix();
-            if (transactionIdPrefix != null) {
-                factory.setTransactionIdPrefix(transactionIdPrefix);
-            }
-            return factory;
+    @Bean
+    public DefaultKafkaProducerFactory factory(KafkaProperties properties) {
+        Map<String, Object> producerProperties = properties.buildProducerProperties();
+        // 添加拦截器
+        producerProperties.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, CustomProducerInterceptor.class.getName());
+        DefaultKafkaProducerFactory<?, ?> factory = new DefaultKafkaProducerFactory<>(producerProperties,new JsonSerializer(),new JsonSerializer());
+        String transactionIdPrefix = properties.getProducer().getTransactionIdPrefix();
+        if (transactionIdPrefix != null) {
+            factory.setTransactionIdPrefix(transactionIdPrefix);
         }
-    }   
-    ```
-
-    实现ProducerInterceptor接口，在onSend方法中执行拦截操作。
-    ```
-    public class CustomProducerInterceptor implements ProducerInterceptor<String, String> {
-
-        private final Logger logger = LoggerFactory.getLogger(KafkaReceiver.class);
-
-        @Override
-        public ProducerRecord<String, String> onSend(ProducerRecord<String, String> producerRecord) {
-            logger.info("CustomProducerInterceptor onSend!");
-            return producerRecord;
-        }
-
-        @Override
-        public void onAcknowledgement(RecordMetadata recordMetadata, Exception e) {
-        }
-
-        @Override
-        public void close() {
-        }
-
-        @Override
-        public void configure(Map<String, ?> map) {
-        }
+        return factory;
     }
-    ```
+}   
+```
+
+实现ProducerInterceptor接口，在onSend方法中执行拦截操作。
+```
+public class CustomProducerInterceptor implements ProducerInterceptor<String, String> {
+
+    private final Logger logger = LoggerFactory.getLogger(KafkaReceiver.class);
+
+    @Override
+    public ProducerRecord<String, String> onSend(ProducerRecord<String, String> producerRecord) {
+        logger.info("CustomProducerInterceptor onSend!");
+        return producerRecord;
+    }
+
+    @Override
+    public void onAcknowledgement(RecordMetadata recordMetadata, Exception e) {
+    }
+
+    @Override
+    public void close() {
+    }
+
+    @Override
+    public void configure(Map<String, ?> map) {
+    }
+}
+```
 
 ---
 
