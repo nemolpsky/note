@@ -66,6 +66,16 @@
 
 ---
 
+## Kakfa
+- [安装配置Zookeeper和Kafka](file/kafka/安装配置Zookeeper和Kafka.md)
+- [SpringBoot集成Kafka](file/kafka/SpringBoot集成Kafka.md)
+- [Kafka生产者](file/kafka/Kafka生产者.md)
+- [Kafka消费者](file/kafka/Kafka消费者.md)
+- [主题与分区](file/kafka/主题与分区.md)
+- [Kafka日志存储原理](file/kafka/Kafka日志存储原理.md)
+
+---
+
 ## Mysql
 - [常用命令](file/mysql/mysql_usual_command.md)
 - [Mysql explain参数解析](file/mysql/mysql_explain.md)
