@@ -77,9 +77,9 @@
 ---
 
 ## 分布式
-- [CAP定理和BASE理论](file/distributed/cap.md)
 - [分布式锁实现](file/distributed/distributed_lock.md)
-
+- [分布式架构概述.md](file/distributed/cap.md)
+- [分布式一致性协议](file/distributed/分布式一致性协议.md)
 ---
 
 ## Kakfa
