@@ -41,7 +41,8 @@
 - Java锁
 	- [Synchronized关键字和锁升级](file/java_thread1/synchronized.md)
 	- [ReentrantLock配合Condition](file/java_thread1/ReentrantLock2.md)
-
+	- [volatile的介绍和使用](file/java_thread1/volatile的介绍和使用.md)
+	- [并发概念以及Java中的并发实现](file/java_thread1/并发概念以及Java中的并发实现.md)
 ---
 
 ## JVM
@@ -78,18 +79,20 @@
 
 ## 分布式
 - [分布式锁实现](file/distributed/distributed_lock.md)
-- [分布式架构概述.md](file/distributed/cap.md)
+- [分布式架构概述](file/distributed/分布式架构概述.md)
 - [分布式一致性协议](file/distributed/分布式一致性协议.md)
 ---
 
-## Kakfa
-- [安装配置Zookeeper和Kafka](file/kafka/安装配置Zookeeper和Kafka.md)
-- [SpringBoot集成Kafka](file/kafka/SpringBoot集成Kafka.md)
-- [Kafka生产者](file/kafka/Kafka生产者.md)
-- [Kafka消费者](file/kafka/Kafka消费者.md)
-- [主题与分区](file/kafka/主题与分区.md)
-- [Kafka日志存储原理](file/kafka/Kafka日志存储原理.md)
-
+## 中间件
+- Kakfa
+	- [安装配置Zookeeper和Kafka](file/middleware/kafka/安装配置Zookeeper和Kafka.md)
+	- [SpringBoot集成Kafka](file/middleware/kafka/SpringBoot集成Kafka.md)
+	- [Kafka生产者](file/middleware/kafka/Kafka生产者.md)
+	- [Kafka消费者](file/middleware/kafka/Kafka消费者.md)
+	- [主题与分区](file/middleware/kafka/主题与分区.md)
+	- [Kafka日志存储原理](file/middleware/kafka/Kafka日志存储原理.md)
+- Zookeeper
+	- [Zookeeper系统模型介绍](file/middleware/zookeeper/Zookeeper系统模型介绍.md)
 ---
 
 ## Mysql
