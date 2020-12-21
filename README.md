@@ -81,6 +81,12 @@
 - [分布式锁实现](file/distributed/distributed_lock.md)
 - [分布式架构概述](file/distributed/分布式架构概述.md)
 - [分布式一致性协议](file/distributed/分布式一致性协议.md)
+
+---
+
+## 微服务组件
+- [Hystrix作用和设计](file/micro/distributed_lock.md)
+
 ---
 
 ## 中间件
