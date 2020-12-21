@@ -85,7 +85,7 @@
 ---
 
 ## 微服务组件
-- [Hystrix作用和设计](file/micro/hystrix/Hystrix的作用和设计.md)
+- [Hystrix的作用和设计](file/micro/hystrix/Hystrix的作用和设计.md)
 
 ---
 

@@ -11,13 +11,13 @@ Hystrix是Netflix的一个项目，官网上的介绍是一个在分布式环境
 在分布式系统中，尤其是大型的分布式系统中，各种服务之间会有着很复杂的依赖关系，比如下面这张图就描绘了一个分布式系统内部的依赖关系，在用户看来只是一个请求，但是服务内部之间其实会有很多互相调用的。
 
 
-![1](https://github.com/nemolpsky/note/raw/master/file/mirco/images/1.png)
+![1](https://github.com/nemolpsky/note/raw/master/file/mirco/hystrix/images/1.png)
 
 
 再看下面这张图，描绘了如果其中有一个服务出问题会怎么样，所有依赖该服务的请求都会阻塞在这里，一直长时间等待响应，最后积压的数量多了，不仅仅会影响到整个服务器的性能，甚至连上游客户直接请求的tomcat的连接池可能都会占满，这也就是一个服务出现问题，导致所有的服务都受到影响。
 
 
-![2](https://github.com/nemolpsky/note/raw/master/file/mirco/images/2.png)
+![2](https://github.com/nemolpsky/note/raw/master/file/mirco/hystrix/images/2.png)
 
 
 这个时候可能你会疑惑，分布式系统不是都会保证高可用吗？举个例子，如果一个分布式系统中有30个服务，每个服务的可用性是99.99%，这已经算是很高的了，但是30个服务累加到一起按下面的公式计算下整个分布式系统的可用性，会发现直接跌到99.7%了，这也就是说如果一个分布式系统中的服务越多，那么最后总的宕机时间无形中就会提高，因为只要有一个出问题，可能就整个系统都会受到影响，这也就是为啥要设计Hystrix来解决这些问题了。
@@ -37,7 +37,7 @@ Hystrix中有两个类```HystrixCommand```和```HystrixObservableCommand```，Hy
 在Hystrix中有两种隔离方式，第一种是线程隔离，第二种是信号隔离，也就是计数器。其实很好理解，正常情况下，一个请求从tomcat进来，再到它调用别的服务，这两步操作都会在同一个线程中执行，所以如果最后调用别的服务这一步如果阻塞了那这个线程也就阻塞了，这个请求也就阻塞住了，也就造成tomcat的请求都阻塞在那里。但是Hystrix会把最后调用别的服务这一步放到另一个线程池中执行，阻塞的话也不会阻塞住当前tomcat请求的这个线程。下面这张图就描述了这个架构，可以发现每个服务都配置了一个线程池。
 
 
-![3](https://github.com/nemolpsky/note/raw/master/file/mirco/images/3.png)
+![3](https://github.com/nemolpsky/note/raw/master/file/mirco/hystrix/images/3.png)
 
 
 上面的命令模式和线程隔离就是Hystrix最核心的东西了，剩下的都是基于这个机制设计的，比如设计调用别的服务的超时时间，如果超过了则直接返回一个默认结果，这就是所谓的降级，如果一定时间内请求失败的数量超过阀值，则直接返回默认结果，也就是打开了熔断器。当然实际的设计会比较复杂，不过大致的概念是这些。
