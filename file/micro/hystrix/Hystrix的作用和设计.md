@@ -41,3 +41,6 @@ Hystrix中有两个类```HystrixCommand```和```HystrixObservableCommand```，Hy
 
 
 上面的命令模式和线程隔离就是Hystrix最核心的东西了，剩下的都是基于这个机制设计的，比如设计调用别的服务的超时时间，如果超过了则直接返回一个默认结果，这就是所谓的降级，如果一定时间内请求失败的数量超过阀值，则直接返回默认结果，也就是打开了熔断器。当然实际的设计会比较复杂，不过大致的概念是这些。
+
+
+> https://github.com/Netflix/Hystrix/wiki/How-it-Works
