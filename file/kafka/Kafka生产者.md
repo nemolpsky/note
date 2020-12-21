@@ -141,7 +141,7 @@ public class CustomProducerInterceptor implements ProducerInterceptor<String, St
 
 前面说了spring-kafka是基于kafka-clients.jar实现的，所以架构设计其实也是指kafka生产者的实现，也是使用Java编写的。设计架构如同下图，整个生产者是由两个线程协调运行，主线程用于前面的创建消息，序列化，分区计算和拦截操作，而真正发消息则会有另一个专门的线程执行。
 
-![BIO](https://github.com/nemolpsky/note/raw/master/file/kafka/images/1.png)
+![kafka](https://github.com/nemolpsky/note/raw/master/file/kafka/images/1.png)
 
 需要注意的是，为了提高效率，不是每创建一条消息就立刻发送，它内部会有一个消息累加器，相当于一个缓存一样，来存放消息，这样每次发送消息都是批量发送。可以通过下面的配置来设置累加器的缓存大小，默认32M。
 
