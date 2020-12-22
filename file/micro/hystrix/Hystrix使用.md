@@ -64,5 +64,62 @@ hystrix:
     }
 ```
 
+---
+
+#### 3. 请求缓存
+
+Hystrix还支持同一个请求中可以缓存结果，后续的请求都可以直接读取缓存结果。首先需要自己实现HystrixCommand类，自定义缓存key的方法，确保唯一性。
+
+```
+public class CacheCommand extends HystrixCommand<String> {
+
+    private RestTemplate restTemplate;
+    private Object param;
+
+    public CacheCommand(Setter setter, RestTemplate restTemplate, Object param) {
+        super(setter);
+        this.restTemplate = restTemplate;
+        this.param = param;
+    }
+
+    @Override
+    protected String run() throws Exception {
+        return restTemplate.getForObject("http://localhost:10002/testGet",String.class);
+    }
+
+    @Override
+    protected String getCacheKey() {
+        return "1";
+    }
+
+    public void flushRequestCache(){
+        HystrixRequestCache.getInstance(
+                HystrixCommandKey.Factory.asKey("key3"), HystrixConcurrencyStrategyDefault.getInstance())
+                .clear("1");
+    }
+}
+```
+
+使用也很简单，调用```HystrixRequestContext.initializeContext();```初始化一下，再执行，就会发现第二次不会真正的去请求依赖的服务，```flushRequestCache```方法是清除缓存的，用来在执行写操作后清除缓存保证后面的读取能拿到最新值。
+
+```
+    @GetMapping("/hystrixGet3")
+    public User hystrixGet3() throws Exception {
+        HystrixRequestContext.initializeContext();
+        logger.info("hystrixGet3 step 1，thread is {}",Thread.currentThread().getName());
+        CacheCommand command1 = new CacheCommand(com.netflix.hystrix.HystrixCommand.Setter
+        .withGroupKey(HystrixCommandGroupKey.Factory.asKey("group3"))
+                .andCommandKey(HystrixCommandKey.Factory.asKey("key3")),new RestTemplate(),null);
+        logger.info("result is {}.",command1.execute());
+        // 调用清除缓存的方法，就不会读取缓存，而是真实的执行请求
+        command1.flushRequestCache();
+        CacheCommand command2 = new CacheCommand(com.netflix.hystrix.HystrixCommand.Setter
+                .withGroupKey(HystrixCommandGroupKey.Factory.asKey("group3"))
+                .andCommandKey(HystrixCommandKey.Factory.asKey("key3")),new RestTemplate(),null);
+        logger.info("result is {}.",command2.execute());
+        return null;
+    }
+```
+
 > https://github.com/Netflix/Hystrix/wiki/Configuration
 > https://github.com/nemolpsky/feign-demo
