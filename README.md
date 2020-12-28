@@ -2,12 +2,12 @@
 
 
 ## Java基础
-  - 基础
-    - [Java底层基础](file/java_base/java_base.md)
+- 基础
+	- [Java底层基础](file/java_base/java_base.md)
 	- [异常体系概述](file/java_base/exception.md)
 	- [四种字符串拼接](file/java_base/string_append_performance.md)
 	- [Java队列介绍使用](file/java_base/queue.md)
-  - Java集合系列
+- Java集合系列
     - [常用集合概述](file/java_base/collections.md)
     - [ArrayList底层原理](file/java_plus/collections/arraylist.md)
 	- [LinkedList底层原理](file/java_plus/collections/linkedlist.md)
@@ -18,7 +18,8 @@
 	- [HashSet底层原理](file/java_plus/collections/hashset.md)
 	- [LinkedHashSet底层原理](file/java_plus/collections/linkedhashset.md)
 	- [TreeSet底层原理](file/java_plus/collections/treeset.md)
-
+- 函数式编程
+	- [Java函数式编程](file/function/Java函数式编程.md)
 ---
 
 ## JAVA并发
