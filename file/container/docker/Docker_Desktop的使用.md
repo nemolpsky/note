@@ -4,7 +4,7 @@ Docker Desktop是Docker官方提供的一个在Windows下运行的软件，可�
 
 >https://www.docker.com/products/docker-desktop
 
-下载安装完后需要配置下仓库镜像，可以选阿里的或者网易的，否则官方镜像速度会比较慢。同时需要右键Docker的图标，选择Switch to Windows container选项，否则拉取镜像的时候会事变。
+下载安装完后需要配置下仓库镜像，可以选阿里的或者网易的，否则官方镜像速度会比较慢。还可以设置虚拟机的内存，磁盘大小等数据。
 
 ![image1](https://github.com/nemolpsky/Note/raw/master/file/container/docker/images/2.png)
 
