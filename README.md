@@ -20,6 +20,8 @@
 	- [TreeSet底层原理](file/java_plus/collections/treeset.md)
 - 函数式编程
 	- [Java函数式编程](file/function/Java函数式编程.md)
+	- [Lambda表达式使用](file/function/Lambda表达式使用.md)
+	
 ---
 
 ## JAVA并发
