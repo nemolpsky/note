@@ -11,10 +11,10 @@ Java IO是Java中用于读取和写入的API，它可能是Java中最重要却�
 
 IO API中，有四个顶级类，InputStream和OutputStream是字节流，读写的时候是以字节为单位，每次读取1字节，也就是8比特，可以读写任何文件，因为所有文件的本质都是由字节组成的。Reader和Writer则是字符流，也就是读取Java中char类型字符单位的数据，因此它也只能读写字符文件。
 
-![1](https://github.com/nemolpsky/Note/raw/master/file/java_base/image/io_inputstream_uml.png)
-![2](https://github.com/nemolpsky/Note/raw/master/file/java_base/image/io_outputstream_uml.png)
-![3](https://github.com/nemolpsky/Note/raw/master/file/java_base/image/io_reader_uml.png)
-![4](https://github.com/nemolpsky/Note/raw/master/file/java_base/image/io_writer_uml.png)
+![1](https://github.com/nemolpsky/Note/raw/master/file/java_base/images/io_inputstream_uml.png)
+![2](https://github.com/nemolpsky/Note/raw/master/file/java_base/images/io_outputstream_uml.png)
+![3](https://github.com/nemolpsky/Note/raw/master/file/java_base/images/io_reader_uml.png)
+![4](https://github.com/nemolpsky/Note/raw/master/file/java_base/images/io_writer_uml.png)
 
 
 ---
@@ -23,8 +23,8 @@ IO API中，有四个顶级类，InputStream和OutputStream是字节流，读写
 
 除了按照上面最基础的读、写和字节、字符分类，还可以按照另一种方式来分类，节点流和处理流，节点流就是直接对数据进行读写操作，而处理流的内部则可以直接对其他的流进行处理，通常处理流都提供缓存池的功能，效率会更高。
 
-![5](https://github.com/nemolpsky/Note/raw/master/file/java_base/image/io_mind_object.png)
-![6](https://github.com/nemolpsky/Note/raw/master/file/java_base/image/io_mind_optype.png)
+![5](https://github.com/nemolpsky/Note/raw/master/file/java_base/images/io_mind_object.png)
+![6](https://github.com/nemolpsky/Note/raw/master/file/java_base/images/io_mind_optype.png)
 
 ---
 
