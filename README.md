@@ -7,6 +7,7 @@
 	- [异常体系概述](file/java_base/exception.md)
 	- [四种字符串拼接](file/java_base/string_append_performance.md)
 	- [Java队列介绍使用](file/java_base/queue.md)
+	- [Java IO stream](file/java_base/Java_IO流.md)
 - Java集合系列
     - [常用集合概述](file/java_base/collections.md)
     - [ArrayList底层原理](file/java_plus/collections/arraylist.md)
@@ -105,25 +106,28 @@
 	- [Zookeeper系统模型介绍](file/middleware/zookeeper/Zookeeper系统模型介绍.md)
 
 - Elasticsearch
-
 	- [安装Elasticsearch和Kibana](file/middleware/elasticsearch/安装Elasticsearch和Kibana.md)
 ---
 
 ## Mysql
 - [常用命令](file/mysql/mysql_usual_command.md)
 - [查询MySQL元数据](file/mysql/查询MySQL元数据.md)
+- [数据库范式](file/mysql/数据库范式.md)
+- [Mysql锁问题](file/mysql/mysql_lock.md)
 - [Mysql explain参数解析](file/mysql/mysql_explain.md)
 - [Mysql索引基础](file/mysql/mysql_index1.md)
 - [Mysql索引进阶](file/mysql/mysql_index2.md)
 - [Mysql优化](file/mysql/mysql_optimize.md)
 - [Mysql底层原理](file/mysql/mysql_tree.md)
 - [Mysql锁问题](file/mysql/mysql_lock.md)
+
 ---
 
 ## 容器
 
 - [Docker Desktop的使用](file/container/docker/Docker_Desktop的使用.md)
 - [运行Docker容器](file/container/docker/运行Docker容器.md)
+- [制作Java Docker镜像](file/container/docker/制作Java_Docker镜像.md)
 
 ---
 
@@ -134,7 +138,7 @@
 
 ## Git
 - [IEDA配合Git的基本使用](file/git/Git基本使用.md)
-
+- [Git回溯历史版本](file/git/Git回溯历史版本.md)
 ---
 
 ## Linux
@@ -151,5 +155,4 @@
 ---
 
 ## 杂项
-- [代码整洁之道 重点归纳](file/java_clean/clean.md)
-- [常用工具类方法](file/utils/utils.md)
+- [代码整洁之道](file/java_clean/clean.md)
