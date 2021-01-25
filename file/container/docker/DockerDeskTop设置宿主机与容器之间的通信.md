@@ -72,23 +72,28 @@ eth0      Link encap:Ethernet  HWaddr 02:50:00:00:00:01
 Docker DeskTop是官方提供的一个在Windows下使用的Docker工具，提供了Docker的运行环境，还提供了个可视化界面，但是实际上是利用了Win 10系统的Hyper-V虚拟机，所以如果想要容器访问Windows系统上的本地服务，除了上面的配置宿主机的IP之外，还要保证虚拟机和Win 10之间的网络是通的。这里对于Docker容器来说，虚拟机就是宿主机，但是虚拟机也有一个宿主机就是Win 10系统。
 
 打开虚拟机设置，新增设置网络。
+
 ![image10](https://github.com/nemolpsky/Note/raw/master/file/container/docker/images/10.png)
 ![image11](https://github.com/nemolpsky/Note/raw/master/file/container/docker/images/11.jpg)
 ![image12](https://github.com/nemolpsky/Note/raw/master/file/container/docker/images/12.jpg)
 ![image13](https://github.com/nemolpsky/Note/raw/master/file/container/docker/images/13.jpg)
 
 配置虚拟机网络共享Win 10系统网络。
+
 ![image14](https://github.com/nemolpsky/Note/raw/master/file/container/docker/images/14.jpg)
 ![image15](https://github.com/nemolpsky/Note/raw/master/file/container/docker/images/15.jpg)
 
 给Docker虚拟机添加网络配置。
+
 ![image16](https://github.com/nemolpsky/Note/raw/master/file/container/docker/images/16.jpg)
 ![image17](https://github.com/nemolpsky/Note/raw/master/file/container/docker/images/17.jpg)
 
 把虚拟网络获取IP和DNS都改成自动获取。
+
 ![image18](https://github.com/nemolpsky/Note/raw/master/file/container/docker/images/18.jpg)
 
 不过Docker DeskTop在安装的时候已经安装了一个虚拟网络，所以可以直接使用这个配置，不需要新建。
+
 ![image19](https://github.com/nemolpsky/Note/raw/master/file/container/docker/images/19.png)
 
 按上述配置就可以保证类似Nginx之类的容器，可以访问到Win 10本地的服务了。
