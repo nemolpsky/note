@@ -101,6 +101,7 @@
 	- [SpringBoot集成Kafka](file/middleware/kafka/SpringBoot集成Kafka.md)
 	- [Kafka生产者](file/middleware/kafka/Kafka生产者.md)
 	- [Kafka消费者](file/middleware/kafka/Kafka消费者.md)
+	- [消费组管理](file/middleware/kafka/消费组管理.md)
 	- [主题与分区](file/middleware/kafka/主题与分区.md)
 	- [Kafka日志存储原理](file/middleware/kafka/Kafka日志存储原理.md)
 - Zookeeper
@@ -132,11 +133,13 @@
 - [常用Docker镜像配置使用](file/container/docker/常用Docker镜像使用.md)
 - [Docker Compose使用](file/container/docker/Docker_Compose使用.md)
 - [Docker DeskTop设置宿主机与容器之间的通信](file/container/docker/DockerDeskTop设置宿主机与容器之间的通信.md)
+- [netshoot镜像使用](file/container/docker/netshoot镜像使用.md)
+
 
 ---
 
 ## Nginx
-- [Nginx的基本配置和使用](file/mysql/mysql_usual_command.md)
+- [Nginx的基本配置和使用](file/nginx/nginx.md)
 
 ---
 
