@@ -152,6 +152,8 @@
 - [Linux用户体系](file/linux/Linux用户体系.md) 
 - [Linux权限体系](file/linux/Linux权限体系.md)
 - [systemctl命令](file/linux/systemctl.md)
+- [Linux Shell展开解析](file/linux/Linux_Shell展开.md)
+- [Shell脚本实现一键拷贝](file/linux/Shell脚本实现一键拷贝.md)
 
 ---
 
