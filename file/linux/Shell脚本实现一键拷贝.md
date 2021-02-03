@@ -2,7 +2,7 @@
 
 Bash Shell的复杂之处在于它的参数展开过于繁琐复杂，而且有些脚本语法有些地方很苛刻，所以写起来很麻烦，但是如果对参数展开了解的够透彻实现起来还是比较容易的，而且脚本也可以从那些复杂繁琐的重复命令里面解脱出来。
 
-详细的可以看[Linux Shell展开解析](https://github.com/nemolpsky/note/blob/master/file/linux/Linux%E6%9D%83%E9%99%90%E4%BD%93%E7%B3%BB.md)。
+详细的可以看[Linux Shell展开解析](https://github.com/nemolpsky/note/blob/master/file/linux/Linux_Shell%E5%B1%95%E5%BC%80.md)。
 
 
 

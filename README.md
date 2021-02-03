@@ -111,17 +111,20 @@
 	- [安装Elasticsearch和Kibana](file/middleware/elasticsearch/安装Elasticsearch和Kibana.md)
 ---
 
-## Mysql
+## MySQL
 - [常用命令](file/mysql/mysql_usual_command.md)
 - [查询MySQL元数据](file/mysql/查询MySQL元数据.md)
 - [数据库范式](file/mysql/数据库范式.md)
-- [Mysql锁问题](file/mysql/mysql_lock.md)
-- [Mysql explain参数解析](file/mysql/mysql_explain.md)
-- [Mysql索引基础](file/mysql/mysql_index1.md)
-- [Mysql索引进阶](file/mysql/mysql_index2.md)
-- [Mysql优化](file/mysql/mysql_optimize.md)
-- [Mysql底层原理](file/mysql/mysql_tree.md)
-- [Mysql锁问题](file/mysql/mysql_lock.md)
+- [MySQL慢日志配置和分析](file/mysql/MySQL慢日志配置和分析.md)
+- [MySQL隔离级别](file/mysql/MySQL隔离级别.md)
+- [MySQL中的锁详解](file/mysql/MySQL中的锁种类.md)
+- [MySQL explain参数解析](file/mysql/mysql_explain.md)
+- [MySQL索引基础](file/mysql/mysql_index1.md)
+- [MySQL索引进阶](file/mysql/mysql_index2.md)
+- [MySQL优化](file/mysql/mysql_optimize.md)
+- [MySQL底层原理](file/mysql/mysql_tree.md)
+
+
 
 ---
 
