@@ -8,7 +8,7 @@ Zookeeper是一个保证强一致性的框架，用途非常广泛，尤其是�
 #### 1.视图结构
 Zookeeper中有着```数据节点```的概念，也就是ZNode，它是Zookeeper中的最小数据单位，每个ZNode中都可以保存数据，而且每个ZNode都可以拥有子节点。也就是说Zookeeper中的ZNode节点最终会是树的结构，而它的命名空间则和Unix文件系统很像，每个节点之间使用/来分割，就像目录一样，例如下图就是一个ZNode节点的树状结构图。
 
-图
+![1](https://github.com/nemolpsky/note/raw/master/file/middleware/zookeeper/images/1.png)
 
 #### 2.事务ID
 事务在数据库中是很常见的，它令数据库可以保证ACID特性，也保证了数据一致性的问题。而Zookeeper作为一个满足CAP理论中CP条件的分布式框架，自然也有着事务的概念来保证数据的一致性。一般对ZNode节点的任何变动操作，例如新增、修改和删除等等都会认为是一次事务操作。因此Zookeeper会为每个事务请求创建一个全局唯一的事务ID，也被称为ZXID，通常是一个64位的数字，Zookeeper就是利用事务ID来保证全局的事务请求的操作顺序。
@@ -49,11 +49,11 @@ Zookeeper能保证分布式系统操作数据时不发生并发问题，就是�
 
 如下面这张图表示的，客户端可以监听多个主题，每当这个主题有变化的时候服务端则会通知客户端，客户端会向服务端注册一个Watcher监听，服务端则会通过这个Watcher监听来发送通知个客户端，客户端在注册了Watcher监听后还会把它存在本地的WatchManager中，这也表示客户端可以注册多个Watcher监听，每次收到通知则在WatchManager中取出对应的Watcher对象来执行回调逻辑，其实就是基于观察者模式的一种设计。
 
-图
+![2](https://github.com/nemolpsky/note/raw/master/file/middleware/zookeeper/images/2.png)
 
 但是为了保证性能，尤其是考虑了分布式系统情况下各种可能发生的网络问题，Zookeeper中的Wathcer机制还是有一些需要特别注意的地方，在Watcher机制中所有的通知都是使用WatchedEvent对象来进行通知传递，而WatchedEvent中只包含了三部分内容，通知状态、事件类型和节点路径，但是并没有其它数据，所有Zookeeper中的Wathcer机制真的只起到了通知的作用，服务端会告诉客户端节点有变化，但是具体数据有什么变化需要客户端自己去查询节点。比如下图显示的就是Watcher通知的状态和类型。
 
-图
+![3](https://github.com/nemolpsky/note/raw/master/file/middleware/zookeeper/images/3.png)
 
 
 Watcher机制的通知流转过程

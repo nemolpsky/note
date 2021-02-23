@@ -2,27 +2,22 @@
 
 Spring Boot提供了自动装配，但是也提供了很多种方式可以修改配置，比如下面这些方式都可以修改配置，并且优先级从上到下降序排列，默认配置是最低优先级的。
 
-```
-(1) 命令行参数
-(2) java:comp/env里的JNDI属性
-(3) JVM系统属性
-(4) 操作系统环境变量
-(5) 随机生成的带random.*前缀的属性（在设置其他属性时，可以引用它们，比如${random.long}）
-(6) 应用程序以外的application.properties或者appliaction.yml文件
-(7) 打包在应用程序内的application.properties或者appliaction.yml文件
-(8) 通过@PropertySource标注的属性源
-(9) 默认属性
-```
+- 命令行参数
+- java:comp/env里的JNDI属性
+- JVM系统属性
+- 操作系统环境变量
+- 随机生成的带random.*前缀的属性（在设置其他属性时，可以引用它们，比如${random.long}）
+- 应用程序以外的application.properties或者appliaction.yml文件
+- 打包在应用程序内的application.properties或者appliaction.yml文件
+- 通过@PropertySource标注的属性源
+- 默认属性
 
-其中配置文件也可以放在不同的地方，优先级同样是从上到下降序排列。此外yml会覆盖properties文件。
+其中配置文件也可以放在不同的地方，优先级同样是从上到下降序排列。此外yml会覆盖properties文件。application.properties和application.yml文件能放在以下四个位置。
+- 外置，在相对于应用程序运行目录的/config子目录里。
+- 外置，在应用程序运行的目录里。
+- 内置，在config包内。
+- 内置，在Classpath根目录。
 
-```
-application.properties和application.yml文件能放在以下四个位置。
-(1) 外置，在相对于应用程序运行目录的/config子目录里。
-(2) 外置，在应用程序运行的目录里。
-(3) 内置，在config包内。
-(4) 内置，在Classpath根目录。
-```
 
 
 ---

@@ -15,7 +15,7 @@ Java其实和C语言还略有不同，C语言直接就把代码编译成了机�
 
 下面这张图就是不同的机器上，不同的版本对应的默认的编译器。-d64表示64位的C2编译器，可以看到其实在64位Windows系统和Linux上，如果安装了64位的JVM那其实C1编译器是无法使用的，也就是说一定会使用C2编译器，所以后面所有的例子其实都是基于C2编译器的基础进行讨论。
 
-![compiler](https://github.com/nemolpsky/note/raw/master/file/jvm/jvm_class/2.png)
+![2](https://github.com/nemolpsky/note/raw/master/file/jvm/images/2.png)
 
 不过上面的按照-client和-server命令来指定编译器是Java 7的做法，在Java 8的时候默认开启了分层编译，也就是C1和C2共用，使用C1加快程序启动速度，使用C2在运行时编译优化热点代码，所以-client和-server在Java 8已经失效了。查看Java版本的时候其实是有显示当前使用的编译器，mixed mode表示编译使用的是混合模式，也就是分层编译。
 ```

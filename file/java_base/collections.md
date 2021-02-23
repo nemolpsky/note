@@ -14,6 +14,45 @@
 
   优先使用iterator迭代器或者forEach方法，因为如果使用普通的for循环每次查找都是从头开始，尤其是数据量特别大的时候，特别慢
 
+下面这个例子，初始化了两个集合，一个ArrayList和一个LinkedList，ArrayList底层是数组，支持随机访问，也实现了RandomAccess接口。LinkedList底层则是链表，不支持随机访问。可以看到get(i)形式对LinkedList特别慢，迭代器则很快，forEach本质上就是迭代器的语法糖，所以也很快。
+```
+public class Main {
+
+    public static void main(String[] args) {
+        List<String> arrayList = new ArrayList<String>();
+        for(int i=0;i<30000;i++){
+            arrayList.add(i+"");
+        }
+
+        List<String> linkedList = new LinkedList<String>();
+        for(int i=0;i<30000;i++){
+            linkedList.add(i+"");
+        }
+
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        for(int i=0;i<arrayList.size();i++){
+            String l = arrayList.get(i);
+        }
+        System.out.println(stopwatch.elapsed(TimeUnit.MILLISECONDS));
+        stopwatch.reset().start();
+        for(int i=0;i<linkedList.size();i++){
+            String str = linkedList.get(i);
+        }
+        System.out.println(stopwatch.elapsed(TimeUnit.MILLISECONDS));
+        stopwatch.reset().start();
+        ListIterator<String> listIterator = linkedList.listIterator();
+        while (listIterator.hasNext()){
+            String str = listIterator.next();
+        }
+        System.out.println(stopwatch.elapsed(TimeUnit.MILLISECONDS));
+        stopwatch.reset().start();
+        for(String str:linkedList){
+        }
+        System.out.println(stopwatch.elapsed(TimeUnit.MILLISECONDS));
+    }
+}
+```
+
 ---
 
 ## List集合

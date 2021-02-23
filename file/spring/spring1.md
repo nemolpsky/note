@@ -1,12 +1,4 @@
-
-## 目录
-<!-- TOC -->
-- [ApplicationContext容器](#ApplicationContext容器)
-- [配置元数据](#配置元数据)
-<!-- /TOC -->
-
----
-## ApplicationContext容器
+### ApplicationContext容器
 ApplicationContext是BeanFactory的子类接口，都是用于加载对象的容器，只不过BeanFactory更偏向于自定义配置，而ApplicationContext则是直接继承了更多完善的功能，所以如果没有特别的需求下，最好使用ApplicationContext来加载对象。
 - ApplicationContext使用
 
@@ -27,7 +19,7 @@ ApplicationContext是BeanFactory的子类接口，都是用于加载对象的容
 
 ---
 
-## 配置元数据
+### 配置元数据
 配置元数据其实就是使用注解或者XML配置文件来配置需要注入到容器中的对象。这里主要介绍注解配置
 - @Bean
   是方法级别的注解，通常和@Configuration或@Component配合使用，可以用来创建一个对象，默认情况下对象名就是方法名。

@@ -50,11 +50,13 @@
 ---
 
 ## JVM
+- [JVM命令行工具](file/jvm/JVM命令行工具.md)
+- [定位Java程序CPU使用过高](file/jvm/定位Java程序CPU使用过高.md)
+- [JVM类加载机制.md](file/jvm/JVM类加载机制.md)
 - [JVM内存区域](file/jvm/jvm_memory.md)
 - [Class文件介绍](file/jvm/jvm_class.md)
 - [JVM即时编译器](file/jvm/JVM即时编译器.md)
 - [JVM垃圾回收](file/jvm/JVM垃圾回收.md)
-
 ---
 
 ## IO
@@ -64,21 +66,25 @@
 
 ---
 
-## Spring
+## Spring全家桶
 - [Spring基本概念](file/spring/spring2.md)
-- [Spring IoC容器](file/spring/spring1.md)
+- [Spring IoC使用](file/spring/spring1.md)
 - [Spring常用注解](file/spring/spring3.md)
 - [Spring常用功能实现](file/spring/spring4.md)
 - [Spring AOP配置自定义注解](file/spring/Spring_AOP.md)
-
----
-
-## Spring Boot
 - [Spring Boot CLI介绍使用](file/spring/SpringBootCLI介绍使用.md)
 - [Spring Boot自定义配置](file/spring/SpringBoot自定义配置.md)
 - [Spring Boot自动配置机制](file/spring/SpringBoot自动配置.md)
-- [SpringBoot的starter机制和自动配置原理](file/spring/springboot2.md)
-- [SpringBoot启动类run()底层原理](file/spring/springboot1.md)
+- [Spring Boot的starter机制和自动配置原理](file/spring/springboot2.md)
+- [Spring Boot启动类run()底层原理](file/spring/springboot1.md)
+
+---
+
+## Netty
+- [Netty实现丢弃服务器](file/netty/Netty实例1-丢弃服务器.md)
+- [Netty实现回声服务器](file/netty/Netty实例2-回声服务器.md)
+- [Netty实现时间服务器](file/netty/Netty实例3-时间服务器.md)
+- [Netty实现HTTP服务器](file/netty/Netty实例4-HTTP服务器.md)
 
 ---
 
@@ -104,6 +110,7 @@
 	- [消费组管理](file/middleware/kafka/消费组管理.md)
 	- [主题与分区](file/middleware/kafka/主题与分区.md)
 	- [Kafka日志存储原理](file/middleware/kafka/Kafka日志存储原理.md)
+	- [Kafka集群机制](file/middleware/kafka/Kafka集群机制.md)
 - Zookeeper
 	- [Zookeeper系统模型介绍](file/middleware/zookeeper/Zookeeper系统模型介绍.md)
 
@@ -118,6 +125,7 @@
 - [MySQL慢日志配置和分析](file/mysql/MySQL慢日志配置和分析.md)
 - [MySQL隔离级别](file/mysql/MySQL隔离级别.md)
 - [MySQL中的锁详解](file/mysql/MySQL中的锁种类.md)
+- [MySQL死锁检测](file/mysql/MySQL死锁检测.md)
 - [MySQL explain参数解析](file/mysql/mysql_explain.md)
 - [MySQL索引基础](file/mysql/mysql_index1.md)
 - [MySQL索引进阶](file/mysql/mysql_index2.md)

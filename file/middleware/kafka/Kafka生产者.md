@@ -141,7 +141,7 @@ public class CustomProducerInterceptor implements ProducerInterceptor<String, St
 
 前面说了spring-kafka是基于kafka-clients.jar实现的，所以架构设计其实也是指kafka生产者的实现，也是使用Java编写的。设计架构如同下图，整个生产者是由两个线程协调运行，主线程用于前面的创建消息，序列化，分区计算和拦截操作，而真正发消息则会有另一个专门的线程执行。
 
-![kafka](https://github.com/nemolpsky/note/raw/master/file/kafka/images/1.png)
+![kafka](https://github.com/nemolpsky/note/raw/master/file/middleware/kafka/images/1.png)
 
 需要注意的是，为了提高效率，不是每创建一条消息就立刻发送，它内部会有一个消息累加器，相当于一个缓存一样，来存放消息，这样每次发送消息都是批量发送。可以通过下面的配置来设置累加器的缓存大小，默认32M。
 
@@ -165,9 +165,9 @@ spring:
 
 ### 6. 获取元数据
 
-最后的一步，就是把这些消息发送到对应的节点上，但是有个问题，如果是集群配置，Kafka怎么知道整个集群的元数据呢？也就是所有节点的地址，然后分别都是什么节点，Leader还是Follow，诸如此类的，Kafka会定期请求集群节点来获取这些元数据，可以通过下列配置来修改间隔时间，默认是5分钟，获取到后存入本地缓存中，注意如果当前发送消息指定的topic在缓存中找不到，也会触发这个请求。
+最后的一步，就是把这些消息发送到对应的节点上，但是有个问题，如果是集群配置，Kafka怎么知道整个集群的元数据呢？也就是所有节点的地址，然后分别都是什么节点，Leader还是Follow，诸如此类的，Kafka会定期请求集群节点来获取这些元数据，其实也就是从Zookeeper中获取，Zookeeper的作用就是用来存储每个节点的元数据，比如主题数据，主题消费的偏移量。
 
-会请求负载最小的节点执行，Kafka内部有记录谁是负载最小的，根据节点当前等待请求响应的数量为准，注意有些配置Spring没有提供配置文件提示，需要在代码中配置，或者在节点上config目录下的producer.properties文件里进行设置。
+可以通过下列代码配置来修改间隔时间，默认是5分钟，获取到后存入本地缓存中，注意如果当前发送消息指定的topic在缓存中找不到，也会触发这个请求。会请求负载最小的节点执行，Kafka内部有记录谁是负载最小的，根据节点当前等待请求响应的数量为准，注意有些配置Spring没有提供配置文件提示，需要在代码中配置，或者在节点上config目录下的producer.properties文件里进行设置。
 
 ```
 @Bean

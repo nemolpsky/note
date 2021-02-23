@@ -2,17 +2,16 @@
 
 1. 拼接String
 
-   反编译之后会发现是会创建一个StringBuilder来追加字符，这里使用的是jad，如果使用其他的反编译出来的是String.valueOf(text1) + text2。
+   反编译之后会发现是会创建一个```StringBuilder```来追加字符，这里使用的是```jad```，如果使用其他的反编译出来的是```String.valueOf(text1) + text2```。
 
    ```
-   	public static String add(String text1, String text2) {
+   public static String add(String text1, String text2) {
 		return text1 + text2;
 	}
    ```
 
    ```
-    public static String add(String text1, String text2)
-    {
+    public static String add(String text1, String text2) {
         return (new StringBuilder(String.valueOf(text1))).append(text2).toString();
     }
    ```

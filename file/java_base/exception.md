@@ -1,5 +1,6 @@
 ## Exception体系：
-所有的异常类都继承自Throwable类，它有两个子类，Error和Exception类。
+所有的异常类都继承自Throwable类，它有两个子类，Error和Exception类，下面这张图就是继承关系。
+![1](https://github.com/nemolpsky/Note/raw/master/file/java_base/images/exception.png)
 
 1. Error
 
