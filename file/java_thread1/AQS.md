@@ -1,11 +1,11 @@
-## AQS底层原理
-```AQS(AbstractQueuedSynchronizer)```是一个抽象同步队列，```JUC(java.util.concurrent)```中很多同步锁都是基于```AQS```实现的。
+### AQS底层原理
+```AQS(AbstractQueuedSynchronizer)```按名字理解是抽象同步队列，其实本质上就是一个双向队列，队列里面的节点存放的就是线程，节点中会有其他的一些属性值表明当前线程的状态，阻塞，等待还是睡眠。```JUC(java.util.concurrent)```中很多同步锁都是基于```AQS```实现的。
 
 ```AQS```的基本原理就是当一个线程请求共享资源的时候会判断是否能够成功操作这个共享资源，如果可以就会把这个共享资源设置为锁定状态，如果当前共享资源已经被锁定了，那就把这个请求的线程阻塞住，也就是放到队列中等待。
 
 ---
 
-### state变量：
+### 一、state变量
 - ```AQS```中有一个被```volatile```声明的变量用来表示同步状态
 - 提供了```getState()```、```setState()```和```compareAndSetState()```方法来修改```state```状态的值
   ```
@@ -27,7 +27,7 @@
 
 ---
 
-### 对共享资源的操作方式：
+### 二、 对共享资源的操作方式：
 上面说了```AQS```是```JUC```中很多同步锁的底层实现，锁也分很多种，有像```ReentrantLock```这样的独占锁，也有```ReentrantReadWriteLock```这样的共享锁，所以```AQS```中也必然是包含这两种操作方式的逻辑
 
 1. 独占式
@@ -97,7 +97,7 @@
 
 ---
 
-### 条件变量Condition
+### 三、条件变量Condition
 ```Condition```中的```signal()```和```await()```方法类似与```notify()```和```wait()```方法，需要和```AQS```锁配合使用。
 ```
 public static void main(String[] args) throws InterruptedException {

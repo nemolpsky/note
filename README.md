@@ -52,7 +52,7 @@
 ## JVM
 - [JVM命令行工具](file/jvm/JVM命令行工具.md)
 - [定位Java程序CPU使用过高](file/jvm/定位Java程序CPU使用过高.md)
-- [JVM类加载机制.md](file/jvm/JVM类加载机制.md)
+- [JVM类加载机制](file/jvm/JVM类加载机制.md)
 - [JVM内存区域](file/jvm/jvm_memory.md)
 - [Class文件介绍](file/jvm/jvm_class.md)
 - [JVM即时编译器](file/jvm/JVM即时编译器.md)

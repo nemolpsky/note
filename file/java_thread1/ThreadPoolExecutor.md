@@ -185,6 +185,42 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSi
      
      直接放弃任务，但是不抛出任何错误，也不做任何操作
 
+4. 执行流程
+- 提交一个任务到线程池
+- 检查核心线程，没满就执行任务，满了则放入队列
+- 队列也满了则会增加等待线程数
+- 超出设置的等待线程数就会触发拒绝策略。
+
+
+5. tomcat的线程池
+Tomcat也是有自己的线程池来保持连接数，不过Tomcat的线程池是在原生ThreadPoolExecutor基础上进行了扩展，除了限制了核心线程数和队列长度之后，其实也就是最后一步有一点点的改动，改成下面的流程。
+- 超出设置的等待线程不会立即触发拒绝策略，而是再次尝试放入队列，如果还是失败就执行拒绝策略。
+  ```
+  public class ThreadPoolExecutor extends java.util.concurrent.ThreadPoolExecutor {
+    
+    ...
+    
+    public void execute(Runnable command, long timeout, TimeUnit unit) {
+        submittedCount.incrementAndGet();
+        try {
+            // 调用 Java 原生线程池的 execute 去执行任务
+            super.execute(command);
+        } catch (RejectedExecutionException rx) {
+          // 如果总线程数达到 maximumPoolSize，Java 原生线程池执行拒绝策略
+            if (super.getQueue() instanceof TaskQueue) {
+                final TaskQueue queue = (TaskQueue)super.getQueue();
+                try {
+                    // 继续尝试把任务放到任务队列中去
+                    if (!queue.force(command, timeout, unit)) {
+                        submittedCount.decrementAndGet();
+                        // 如果缓冲队列也满了，插入失败，执行拒绝策略。
+                        throw new RejectedExecutionException("...");
+                    }
+                }
+            }
+        }
+  }
+  ```
 
 ## 总结
 - 线程池中最重要的就是工作线程数、最大线程数、队列大小和拒绝策略四个参数，决定了对系统性能的影响
