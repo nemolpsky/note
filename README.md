@@ -124,6 +124,7 @@
 - [数据库范式](file/mysql/数据库范式.md)
 - [MySQL慢日志配置和分析](file/mysql/MySQL慢日志配置和分析.md)
 - [MySQL隔离级别](file/mysql/MySQL隔离级别.md)
+- [MySQL一致性读](file/mysql/MySQL一致性读.md)
 - [MySQL中的锁详解](file/mysql/MySQL中的锁种类.md)
 - [MySQL死锁检测](file/mysql/MySQL死锁检测.md)
 - [MySQL explain参数解析](file/mysql/mysql_explain.md)
