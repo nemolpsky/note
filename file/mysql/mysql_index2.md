@@ -6,7 +6,7 @@
 
    目前InnoDB引擎中所有的主键都默认是聚簇索引，如果没有主键则隐式定义一个主键来当做聚簇索引
 
-   - ![1](https://github.com/nemolpsky/note/raw/master/file/mysql/image/mysql_tree7.png)
+   ![1](https://github.com/nemolpsky/note/raw/master/file/mysql/image/mysql_tree7.png)
 
    - 优点
 
@@ -40,11 +40,9 @@
 
    而建立一个联合索引(key1,key2,key3,key4)，实际上确实建立了4个索引，分别是(key1)，(key1,key2)，(key1,key2,key3)，(key1,key2,key3,key4)，而每次查询匹配都是从左边开始匹配。
 
-   - 例子
+   其实总结一下就是只要查询条件能匹配到上面四个索引就可以，可以忽略排序，如果匹配不上就无法使用这个索引。
 
-     其实总结一下就是只要查询条件能匹配到上面四个索引就可以，可以忽略排序，如果匹配不上就无法使用这个索引。
-
-     ```
+   ```
      // 下面这五种查询都可以使用到这个索引
      select * from table1 where key1 = 1;
      select * from table1 where key1 = 1 and key2 = 1;
@@ -55,7 +53,7 @@
      // 下面这两种就没办法使用到这种索引了
      select * from table1 where key2 = 1;
      select * from table1 where key2 = 1 and key3 = 1;
-     ```
+   ```
 
    - 优点
 
@@ -63,12 +61,12 @@
      - 联合索引包含了多个字段，所以有时候查询索引就可以直接满足要查询的字段了，不需要回表查询了，也就是覆盖索引，大大的提高了效率
      - 如果筛选条件有多个的时候联合索引可以直接在索引中过滤掉大量的数据，效率更好，单个索引过滤的数据量会小很多，后面的条件还要在大量数据中继续过滤，性能很低。
 
-       ```
+     ```
        // 假如表里面有100W条数据，假设每个条件都可以筛选出10%，一个条件就是10W
        // 如果只有key1有索引，过滤出来的数据量就是10W，再在这10W里面过滤另外两个条件
        // 但是如果是联合索引则是100W * 10% * 10% * 10%，筛选出1000条数据
        select * from table1 where key1=1 and key2=2 and key3=3
-       ```
+     ```
 
 5. 查询优化器
 

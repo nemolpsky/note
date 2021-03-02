@@ -8,7 +8,7 @@ MySQL官方对索引的定义是是帮助MySQL高效获取数据的数据结构�
 
    索引是在MYSQL的存储引擎层中实现的，所以每种存储引擎的索引都不一定完全相同，也不是所有的存储引擎都支持所有的索引类型，MYSQL目前提供了一下4种索引。
 
-   - B+Tree 索引：最常见的索引类型，大部分引擎都支持[B+树索引](https://github.com/nemolpsky/algorithm/blob/master/file/data/tree.md])。
+   - B+Tree 索引：最常见的索引类型，大部分引擎都支持[B+树索引](https://github.com/nemolpsky/algorithm/blob/master/file/data/tree.md)。
    - HASH 索引：只有Memory引擎支持，使用场景简单，实现就是每行数据都计算出一个hashCode，适合等值查询，会很快。
    - R-Tree 索引(空间索引)：空间索引是MyISAM的一种特殊索引类型，主要用于地理空间数据类型。
    - Full-text (全文索引)：全文索引也是MyISAM的一种特殊索引类型，主要用于全文索引，InnoDB从MYSQL5.6版本提供对全文索引的支持。
