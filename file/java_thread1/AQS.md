@@ -140,6 +140,6 @@ public static void main(String[] args) throws InterruptedException {
 
 - 在```AQS```中的原理
 
-  上面```lock.newCondition()```其实是```new```一个```AQS```中```ConditionObject```内部类的对象出来，这个对象里面有一个队列，当调用```await()```方法的时候会存入一个```Node```节点到这个队列中，并且调用```park()```方法阻塞当前线程，释放当前线程的锁。而调用```singal()```方法则会移除内部类中的队列头部的```Node```，然后放入```AQS```中的队列中等待执行机会
+  上面```lock.newCondition()```其实是```new```一个```AQS```中```ConditionObject```内部类的对象出来，这个对象里面有一个队列，当调用```await()```方法的时候会存入一个```Node```节点到这个队列中，并且调用```park()```方法阻塞当前线程，释放当前线程的锁。而调用```singal()```方法则会移除内部类中的队列头部的```Node```，然后放入```AQS```中的队列中等待执行机会。
 
 - 同样的，```AQS```并没有实现```newCondition()```方法，也是需要子类自己去实现

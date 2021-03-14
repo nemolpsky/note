@@ -92,9 +92,9 @@
         return null;
      }
 
-    static int indexFor(int h, int length) {
+     static int indexFor(int h, int length) {
         return h & (length-1);
-    }
+     }
      ```
    - 1.8版本
 

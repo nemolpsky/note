@@ -45,8 +45,11 @@
 - Java锁
 	- [Synchronized关键字和锁升级](file/java_thread1/synchronized.md)
 	- [ReentrantLock配合Condition](file/java_thread1/ReentrantLock2.md)
+	- [Java中的CAS操作](file/java_thread1/Java中的CAS操作.md)
 	- [volatile的介绍和使用](file/java_thread1/volatile的介绍和使用.md)
 	- [并发概念以及Java中的并发实现](file/java_thread1/并发概念以及Java中的并发实现.md)
+
+	
 ---
 
 ## JVM
@@ -56,7 +59,7 @@
 - [JVM内存区域](file/jvm/jvm_memory.md)
 - [Class文件介绍](file/jvm/jvm_class.md)
 - [JVM即时编译器](file/jvm/JVM即时编译器.md)
-- [JVM垃圾回收](file/jvm/JVM垃圾回收.md)
+- [JVM垃圾收集器](file/jvm/JVM垃圾回收.md)
 ---
 
 ## IO
@@ -77,6 +80,7 @@
 - [Spring Boot自动配置机制](file/spring/SpringBoot自动配置.md)
 - [Spring Boot的starter机制和自动配置原理](file/spring/springboot2.md)
 - [Spring Boot启动类run()底层原理](file/spring/springboot1.md)
+- [Spring中的RequestContextHolder](file/spring/Spring中的RequestContextHolder.md)
 
 ---
 
@@ -96,9 +100,13 @@
 ---
 
 ## 微服务组件
-- [Hystrix的作用和设计](file/micro/hystrix/Hystrix的作用和设计.md)
-- [Hystrix使用](file/micro/hystrix/Hystrix使用.md)
-
+- Hystrix
+	- [Hystrix的作用和设计](file/micro/hystrix/Hystrix的作用和设计.md)
+	- [Hystrix使用](file/micro/hystrix/Hystrix使用.md)
+- Eureka
+	- [Eureka内部设计](file/micro/eureka/Eureka内部设计.md)
+	- [Eureka集群](file/micro/eureka/Eureka集群.md)
+	- [Eureka内部数据结构](file/micro/eureka/Eureka内部数据结构.md)
 ---
 
 ## 中间件
