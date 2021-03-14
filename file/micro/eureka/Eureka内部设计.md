@@ -69,5 +69,5 @@ int toEvict = Math.min(expiredLeases.size(), evictionLimit);
 
 所以每个客户端启动时不仅仅注册自己到Eureka，还会从Eureka那里获取一份注册表信息存放在客户端本地缓存中，这也是Eureka保证AP的一种设计，如果客户端本地的缓存里已经有数据了，Eureka服务不可用也不会影响到客户端之间的调用，最多就是注册表数据不能够保证是最新的。
 
-Eureka为了性能在注册表数据结构这块做了一些优化，添加了[多级缓存](file/micro/eureka/Eureka内部数据结构.md)。
+Eureka为了性能在注册表数据结构这块做了一些优化，使用[多级缓存]的方式来实现(https://github.com/nemolpsky/note/blob/master/file/micro/eureka/Eureka%E5%86%85%E9%83%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.md)。
 

@@ -78,4 +78,4 @@ Eureka集群是没有主从节点之说，每个节点都是平等的可以进�
 
 因为每个节点都会对集群其他节点作同步操作，所以Eureka内部注册表维护了对每个实例最后一次更改的时间戳，如果其他节点的时间戳比当前节点内的时间戳更新就表示更新自己的注册表，反之则是更新对方的注册表。
 
-![2](https://github.com/nemolpsky/note/raw/master/file/micro/hystrix/eureka/2.png)
+![2](https://github.com/nemolpsky/note/raw/master/file/micro/eureka/eureka/2.png)
