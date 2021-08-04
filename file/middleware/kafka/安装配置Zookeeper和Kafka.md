@@ -25,7 +25,7 @@
     export  PATH=$PATH:$ZOOKEEPER _HOME/bin
     ```
 
-    设置配置文件的基本参数，注意，需要在数据目录下创建一个myid文件，里面填写一个数字作为节点编号，不重复即可。
+    设置配置文件的基本参数，注意，需要在数据目录下创建一个myid文件，里面填写一个数字作为节点编号，不重复即可，如果是单节点就无需配置。
 
     ```
     # 心跳时间，2000毫秒
@@ -72,7 +72,8 @@
     ```
     # 节点编号，需要保证唯一性
     broker.id=0
-    # 对外提供服务的ip地址和端口，比如Java调用时就要通过这个链接
+    # 对外提供服务的ip地址和端口，比如Java调用时就要通过这个链接，如果不配置这个或者配置错了连接的时候就会提示找不到Kafka的节点
+    # listeners=PLAINTEXT://112.17.0.1:9092，在腾讯云上面要注意机器有自己的内网IP，不能输入127.0.0.1，要输入内网IP，ifconfig查看内网IP
     listeners=PLAINTEXT://localhost:9092
     # 日志存放目录，也是实际存放消息日志的地方
     log.dirs=/opt/tmp/kafka-logs
@@ -88,4 +89,13 @@
     // 后台启动
     ./kafka-server-start.sh -daemon config/server.properties
     ./kafka-server-start.sh config/server.properties &
+    ```
+    
+4. 安装kafka-manager
+    
+    使用docker安装，拉取稳定版本的镜像。启动的时候设置zookeeper的地址，主要要和上面的内网IP保持一致。
+    
+    ```
+    docker pull hlebalbau/kafka-manager:stable
+    docker run --name kafka-manager -d -p 49000:9000 -e ZK_HOSTS="http://112.17.0.1:2181" hlebalbau/kafka-manager:stable
     ```
