@@ -79,6 +79,8 @@
     log.dirs=/opt/tmp/kafka-logs
     # zookeeper地址，下面这个方式，会直接在zookeeper根目录创建节点，可以创建指定根目录，例如localhost:2181/kafka
     zookeeper.connect=localhost:2181
+    # 这个必须加，否则主题删除不了
+    delete.topic.enable=true
     ```
 
     同样的，Kafka的bin目录下也有各种辅助脚本。
