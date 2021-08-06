@@ -42,6 +42,8 @@
 - 线程池
 	- [Executors提供的常用线程池介绍](file/java_thread1/ThreadPool_base.md)
 	- [自定义线程池详解](file/java_thread1/ThreadPoolExecutor.md)
+	- [SpringBoot配置线程池](file/java_thread1/SpringBoot配置线程池.md)
+	- [CompletableFuture的介绍和使用](file/java_thread1/CompletableFuture的介绍和使用.md)
 - Java锁
 	- [Synchronized关键字和锁升级](file/java_thread1/synchronized.md)
 	- [ReentrantLock配合Condition](file/java_thread1/ReentrantLock2.md)

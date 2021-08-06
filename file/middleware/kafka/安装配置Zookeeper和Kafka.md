@@ -63,8 +63,6 @@
     ```
     // 解压
     tar -zxvf kafka_2.11-2.0.0.tgz
-
-    // 可一样配置环境变量
     ```
 
     设置配置文件，conf目录下的server.properties文件
@@ -73,14 +71,21 @@
     # 节点编号，需要保证唯一性
     broker.id=0
     # 对外提供服务的ip地址和端口，比如Java调用时就要通过这个链接，如果不配置这个或者配置错了连接的时候就会提示找不到Kafka的节点
-    # listeners=PLAINTEXT://112.17.0.1:9092，在腾讯云上面要注意机器有自己的内网IP，不能输入127.0.0.1，要输入内网IP，ifconfig查看内网IP
+    # listeners=PLAINTEXT://:9092，本地配置127.0.0.1就可以
     listeners=PLAINTEXT://localhost:9092
+
+    # 像在腾讯云这样的包含内网IP和外网IP的需要在host.name上配置内网IP，在advertised.listeners中配置外网IP
+    host.name=10.0.4.7
+    advertised.listeners=PLAINTEXT://142.246.329.137:9092
+
     # 日志存放目录，也是实际存放消息日志的地方
     log.dirs=/opt/tmp/kafka-logs
     # zookeeper地址，下面这个方式，会直接在zookeeper根目录创建节点，可以创建指定根目录，例如localhost:2181/kafka
     zookeeper.connect=localhost:2181
     # 这个必须加，否则主题删除不了
     delete.topic.enable=true
+    # 这个也最好加，禁止创建默认主题，比如监听了topic1，但是没有创建，会自动创建一个分区和副本都为1的主题，后续修改很麻烦。但是注意，它不会禁止spring中的TopicBuilder去创建主题。
+    auto.create.topics.enable=false
     ```
 
     同样的，Kafka的bin目录下也有各种辅助脚本。
@@ -97,7 +102,10 @@
     
     使用docker安装，拉取稳定版本的镜像。启动的时候设置zookeeper的地址，主要要和上面的内网IP保持一致。
     
+    拉取kafka主题信息的时候，也要输入内网IP，不能输入127.0.0.1，在云服务器上127.0.0.1指向的是公网IP。
+
     ```
     docker pull hlebalbau/kafka-manager:stable
     docker run --name kafka-manager -d -p 49000:9000 -e ZK_HOSTS="http://112.17.0.1:2181" hlebalbau/kafka-manager:stable
     ```
+
