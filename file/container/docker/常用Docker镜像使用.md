@@ -6,3 +6,4 @@
 - [Jenkins](https://gist.github.com/nemolpsky/61f422f2e71796cbd884f662c6613188)
 - [Mysql](https://gist.github.com/nemolpsky/e4ef59b693e1ebd784d528aca7565031)
 - [Nginx](https://gist.github.com/nemolpsky/c6e740e239589631a35c6c272764dc9c)
+- [Nacos](https://gist.github.com/nemolpsky/a4ada5507b6f31bc39c7b861c4957676)
