@@ -57,91 +57,90 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSi
 
      这里创建了一个工作线程数为1，最大线程数为2，空闲线程存活时间10秒，队列长度为1，拒绝策略是ThreadPoolExecutor.AbortPolicy()，就是直接放弃任务并抛出个异常
     
-     ```
-     // 工作线程数为1
- 	 Integer corePoolSize = 1;
-     // 最大线程数为2
- 	 Integer maximumPoolSize = 2;
-     // 空闲线程存活时间10秒
- 	 Integer keepAliveTime = 10;
- 	 TimeUnit unit = TimeUnit.SECONDS;
-     // 队列容量为1
- 	 ArrayBlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<>(1);
- 	 ThreadFactory factory = Executors.defaultThreadFactory();
-		
-     // 使用AbortPolicy策略，该策略将会直接抛出RejectedExecutionException异常
- 	 RejectedExecutionHandler abortHandler = new ThreadPoolExecutor.AbortPolicy();
+      ```
+      // 工作线程数为1
+      Integer corePoolSize = 1;
+      // 最大线程数为2
+      Integer maximumPoolSize = 2;
+      // 空闲线程存活时间10秒
+      Integer keepAliveTime = 10;
+      TimeUnit unit = TimeUnit.SECONDS;
+      // 队列容量为1
+      ArrayBlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<>(1);
+      ThreadFactory factory = Executors.defaultThreadFactory();
+        
+      // 使用AbortPolicy策略，该策略将会直接抛出RejectedExecutionException异常
+      RejectedExecutionHandler abortHandler = new ThreadPoolExecutor.AbortPolicy();
 
-     // 创建线程池
- 	 ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, unit,workQueue, factory, abortHandler);   
-     ```
+      // 创建线程池
+      ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, unit,workQueue, factory, abortHandler);   
+      ```
 
-   - 执行线程池
-     
-     这里用实现Runnable的方法创建了一个简单的任务类，就打印任务名，再等待10秒。
+    - 执行线程池
+      
+      这里用实现Runnable的方法创建了一个简单的任务类，就打印任务名，再等待10秒。
 
-     ```
-	class MyThread implements Runnable {
-	
-	    private final String taskName;
-	
-	    public MyThread(String taskName) {
-		this.taskName = taskName;
-	    }
-	
-	    @Override
-	    public void run() {
-		System.out.println("taskName:" + taskName);
-		try {
-		    TimeUnit.SECONDS.sleep(10);
-		} catch (InterruptedException e) {
-		    e.printStackTrace();
-		}
-	    }
-	
-	}
-	
-	MyThread thread1 = new MyThread("1");
-	executor.execute(thread1);
-	getExecutorsInfo(executor);
-	
-	MyThread thread2 = new MyThread("2");
-	executor.execute(thread2);
-	getExecutorsInfo(executor);
-	
-	MyThread thread3 = new MyThread("3");
-	executor.execute(thread3);
-	getExecutorsInfo(executor);
-	
-	//        MyThread thread4 = new MyThread("4");
-	//        executor.execute(thread4);
-	//        getExecutorsInfo(executor);
-	
-	public static void getExecutorsInfo(ThreadPoolExecutor executorService){
-	// 获取线程池运行时的参数信息
-	String info = String.format("线程池中当前的线程数量：%d，正在执行任务的线程数量：%d，曾经创建过的最大线程数量：%d，线程池队列中当前的任务数量：%d",
-		executorService.getPoolSize(),
-		executorService.getActiveCount(),
-		executorService.getLargestPoolSize(),
-		executorService.getQueue().size());
-	
-	// 打印线程池运行时的参数信息
-	System.out.println(info);
+      ```
+      class MyThread implements Runnable {
+      
+          private final String taskName;
+      
+          public MyThread(String taskName) {
+              this.taskName = taskName;
+          }
+      
+          @Override
+          public void run() {
+              System.out.println("taskName:" + taskName);
+          try {
+              TimeUnit.SECONDS.sleep(10);
+          } catch (InterruptedException e) {
+              e.printStackTrace();
+          }
+      
+      }
+      
+      MyThread thread1 = new MyThread("1");
+      executor.execute(thread1);
+      getExecutorsInfo(executor);
+      
+      MyThread thread2 = new MyThread("2");
+      executor.execute(thread2);
+      getExecutorsInfo(executor);
+      
+      MyThread thread3 = new MyThread("3");
+      executor.execute(thread3);
+      getExecutorsInfo(executor);
+      
+      //        MyThread thread4 = new MyThread("4");
+      //        executor.execute(thread4);
+      //        getExecutorsInfo(executor);
+      
+      public static void getExecutorsInfo(ThreadPoolExecutor executorService){
+      // 获取线程池运行时的参数信息
+      String info = String.format("线程池中当前的线程数量：%d，正在执行任务的线程数量：%d，曾经创建过的最大线程数量：%d，线程池队列中当前的任务数量：%d",
+        executorService.getPoolSize(),
+        executorService.getActiveCount(),
+        executorService.getLargestPoolSize(),
+        executorService.getQueue().size());
+      
+      // 打印线程池运行时的参数信息
+      System.out.println(info);
      ```
    - 执行结果
 
      注意看结果，第1个任务进来创建了一个工作线程，第2个任务进来进队列等待，第3个任务进来又创建了一个线程。如果这个时候第4个任务也进来就会触发拒绝策略。
      
      ```
-	taskName:1
-	线程池中当前的线程数量：1，正在执行任务的线程数量：1，曾经创建过的最大线程数量：1，线程池队列中当前的任务数量：0
-	线程池中当前的线程数量：1，正在执行任务的线程数量：1，曾经创建过的最大线程数量：1，线程池队列中当前的任务数量：1
-	线程池中当前的线程数量：2，正在执行任务的线程数量：2，曾经创建过的最大线程数量：2，线程池队列中当前的任务数量：1
-	taskName:3
-	taskName:2
+    taskName:1
+    线程池中当前的线程数量：1，正在执行任务的线程数量：1，曾经创建过的最大线程数量：1，线程池队列中当前的任务数量：0
+    线程池中当前的线程数量：1，正在执行任务的线程数量：1，曾经创建过的最大线程数量：1，线程池队列中当前的任务数量：1
+    线程池中当前的线程数量：2，正在执行任务的线程数量：2，曾经创建过的最大线程数量：2，线程池队列中当前的任务数量：1
+    taskName:3
+    taskName:2
      ```
 
-4. 拒绝策略
+3. 拒绝策略
    线程池一般先检查工作线程数量，超出则放入队列，队列满了则检查最大线程数量，如果3者都超出设定值就会执行拒绝策略。如果设置工作线程数为1，最大线程数为1，队列为1000，这时来500个任务也不会执行拒绝操作，因为都放到队列中了，只有来1001个任务，前1000个任务把队列塞满，第1001个任务就会触发策略。。
 
    - ThreadPoolExecutor.AbortPolicy()
@@ -160,7 +159,7 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSi
      
      直接放弃任务，但是不抛出任何错误，也不做任何操作
 
-5. 执行流程
+4. 执行流程
 - 提交一个任务到线程池
 - 检查核心线程，没满就执行任务，满了则放入队列
 - 队列也满了则会增加等待线程数
