@@ -86,47 +86,47 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSi
 	    private final String taskName;
 	
 	    public MyThread(String taskName) {
-	        this.taskName = taskName;
+		this.taskName = taskName;
 	    }
 	
 	    @Override
 	    public void run() {
-	        System.out.println("taskName:" + taskName);
-	        try {
-	            TimeUnit.SECONDS.sleep(10);
-	        } catch (InterruptedException e) {
-	            e.printStackTrace();
-	        }
+		System.out.println("taskName:" + taskName);
+		try {
+		    TimeUnit.SECONDS.sleep(10);
+		} catch (InterruptedException e) {
+		    e.printStackTrace();
+		}
 	    }
 	
 	}
-
-   	MyThread thread1 = new MyThread("1");
-        executor.execute(thread1);
-        getExecutorsInfo(executor);
-
-        MyThread thread2 = new MyThread("2");
-        executor.execute(thread2);
-        getExecutorsInfo(executor);
-
-        MyThread thread3 = new MyThread("3");
-        executor.execute(thread3);
-        getExecutorsInfo(executor);
-
+	
+	MyThread thread1 = new MyThread("1");
+	executor.execute(thread1);
+	getExecutorsInfo(executor);
+	
+	MyThread thread2 = new MyThread("2");
+	executor.execute(thread2);
+	getExecutorsInfo(executor);
+	
+	MyThread thread3 = new MyThread("3");
+	executor.execute(thread3);
+	getExecutorsInfo(executor);
+	
 	//        MyThread thread4 = new MyThread("4");
 	//        executor.execute(thread4);
 	//        getExecutorsInfo(executor);
-
-       public static void getExecutorsInfo(ThreadPoolExecutor executorService){
-        // 获取线程池运行时的参数信息
-        String info = String.format("线程池中当前的线程数量：%d，正在执行任务的线程数量：%d，曾经创建过的最大线程数量：%d，线程池队列中当前的任务数量：%d",
-                executorService.getPoolSize(),
-                executorService.getActiveCount(),
-                executorService.getLargestPoolSize(),
-                executorService.getQueue().size());
-
-        // 打印线程池运行时的参数信息
-        System.out.println(info);
+	
+	public static void getExecutorsInfo(ThreadPoolExecutor executorService){
+	// 获取线程池运行时的参数信息
+	String info = String.format("线程池中当前的线程数量：%d，正在执行任务的线程数量：%d，曾经创建过的最大线程数量：%d，线程池队列中当前的任务数量：%d",
+		executorService.getPoolSize(),
+		executorService.getActiveCount(),
+		executorService.getLargestPoolSize(),
+		executorService.getQueue().size());
+	
+	// 打印线程池运行时的参数信息
+	System.out.println(info);
      ```
    - 执行结果
 
