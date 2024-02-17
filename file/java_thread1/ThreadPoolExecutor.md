@@ -30,13 +30,16 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSi
      
    - maximumPoolSize(最大线程数)
 
-     这个参数是表示线程池中最大线程数量，因为实际中不可能你设置了10个工作线程刚好就是有10个任务进来，可能是20个任务，这时候就会创建20个线程，有10个是工作线程，另外10个线程则等待执行。
+     这个参数是表示线程池中最大线程数量，当线程池工作线程占满了，队列也占满了，这个参数就会起作用，如果设置为10，这个时候就会再创建10个线程。
+     
    - keepAliveTime(多余线程存活时间)
      
      这个参数则是指定了上面说的除工作线程之外多余等待的线程的存活时间，可以设置过了多长时间就把这些等待的线程清理掉。
+     
    - unit(时间单位)
 
      接受一个TimeUnit类型的参数，表示上面keepAliveTime参数的时间单位是多少。
+     
    - workQueue(队列)
 
      所有的排队等待空闲线程都放在这个队列中。
@@ -44,6 +47,7 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSi
    - factory(线程创建工厂)
 
      线程池使用这个工厂来创建线程。
+     
    - abortHandler(拒绝策略)
 
      上面讲了工作线程数和最大线程数，但是实际中任务是可能比最大线程数还要大的，这个时候线程池就会根据你的拒绝策略来处理这些多余的任务了，总共有四种策略，后续会介绍。
@@ -61,7 +65,7 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSi
      // 空闲线程存活时间10秒
  	 Integer keepAliveTime = 10;
  	 TimeUnit unit = TimeUnit.SECONDS;
-     // 队列 
+     // 队列容量为1
  	 ArrayBlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<>(1);
  	 ThreadFactory factory = Executors.defaultThreadFactory();
 		
@@ -74,119 +78,90 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSi
 
    - 执行线程池
      
-     这里创建了一个HashMap，长度是30，里面存了30个false。然后创建了一个线程类，
-     接收这个map参数和一个int参数修改对应key的值为true，最后调用execute()方法接收一个Thread对象来执行任务，也就是有30个任务修改map中30个key的value。
+     这里用实现Runnable的方法创建了一个简单的任务类，就打印任务名，再等待10秒。
 
      ```
-     
-	 // 一个map值都是false
-	 HashMap<Integer,Boolean> map = new HashMap<Integer,Boolean>();
-	 for (int l = 0; l < 30; l++) {
-		 map.put(l,false);
-	 }
-		
-	 int count = 0;
-	 int i = 0;
+	class MyThread implements Runnable {
+	
+	    private final String taskName;
+	
+	    public MyThread(String taskName) {
+	        this.taskName = taskName;
+	    }
+	
+	    @Override
+	    public void run() {
+	        System.out.println("taskName:" + taskName);
+	        try {
+	            TimeUnit.SECONDS.sleep(10);
+	        } catch (InterruptedException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	
+	}
 
-	 for (i = 0; i < 30; i++) {
-	     try {
-		     // 不能返回线程执行的结果
-			 executor.execute(new MyThread1(i,map));
-			 // 调用get方法就会阻塞当前线程直到完成
-		 } catch (Exception e) {
-			 System.out.println("被拒绝的任务的key: " + i);
-			 e.printStackTrace();
-			 count ++;
-		 }
-	 }
+   	MyThread thread1 = new MyThread("1");
+        executor.execute(thread1);
+        getExecutorsInfo(executor);
 
-     // 在所有任务执行完后关闭线程池
-     executor.shutdown();
+        MyThread thread2 = new MyThread("2");
+        executor.execute(thread2);
+        getExecutorsInfo(executor);
 
-     主线程睡眠一段时间，避免上面的for循环中线程池中的任务还没有执行完就开始打印结果
-     //try {
-	 //    TimeUnit.SECONDS.sleep(10);
-	 //} catch (InterruptedException e) {
-	 //	 e.printStackTrace();
-	 //}
+        MyThread thread3 = new MyThread("3");
+        executor.execute(thread3);
+        getExecutorsInfo(executor);
 
-	 // 被拒绝执行的任务数量
-	 System.out.println("被拒绝的任务的数量: " + count);
-		
-	 // 被拒绝执行的任务对应的map里的值
-	 for(Entry<Integer,Boolean> entry:map.entrySet()) {
-		 if (entry.getValue() == false) {
-			 System.out.println("被拒绝的任务的key: " + entry.getKey());
-		 }
-	 }
-     ```
-     
-     ```
-     class MyThread1 extends Thread {
-         private int i;
-         private HashMap<Integer,Boolean> map;
+	//        MyThread thread4 = new MyThread("4");
+	//        executor.execute(thread4);
+	//        getExecutorsInfo(executor);
 
-         public MyThread1(int i,HashMap<Integer,Boolean> map) {
-	         this.map = map;
-	         this.i = i;
-	     }
+       public static void getExecutorsInfo(ThreadPoolExecutor executorService){
+        // 获取线程池运行时的参数信息
+        String info = String.format("线程池中当前的线程数量：%d，正在执行任务的线程数量：%d，曾经创建过的最大线程数量：%d，线程池队列中当前的任务数量：%d",
+                executorService.getPoolSize(),
+                executorService.getActiveCount(),
+                executorService.getLargestPoolSize(),
+                executorService.getQueue().size());
 
-	     @Override
-	     public void run() {
-
-             //try {
-			 //    TimeUnit.SECONDS.sleep(1);
-		     //} catch (InterruptedException e) {
-			 //    e.printStackTrace();
-		     //}
-
-		     // 修改map中对应的值
-		     map.put(i, true);
-	     }
-
-     }
-
-
+        // 打印线程池运行时的参数信息
+        System.out.println(info);
+    }
      ```
    - 执行结果
 
-     上面的代码中有三个地方打印了信息，第一个是catch块中，因为使用的是ThreadPoolExecutor.AbortPolicy()策略，而工作线程数只有1，最大线程数是2，30个循环有很大的可能性会有线程被拒绝，被拒绝之后就会抛出一个异常。这里一定要catch住，不然整个线程池都会停止运行，第二个是打印被拒绝的任务的数量，第三个则是遍历打印map看看value还是false没有被修改的key是不是和前面打印的对的上，验证是否任务真的被拒绝了。注意这个结果是随机的，可以在线程类里面睡眠一段时间，会发现很有很多的任务被拒绝，因为执行一个任务的时间长了，线程池的工作线程更加无法处理这么多任务，但是要注意让主线程打印结果前等待下，不然可能线程池的任务还没执行就开始打印结果了，数据会不准。
+     注意看结果，第1个任务进来创建了一个工作线程，第2个任务进来进队列等待，第3个任务进来又创建了一个线程。如果这个时候第4个任务也进来就会触发拒绝策略。
      
      ```
-     被拒绝的任务的key: 7
-     java.util.concurrent.RejectedExecutionException: Task Thread[Thread-7,5,main] rejected from java.util.concurrent.ThreadPoolExecutor@33909752[Running, pool size = 2, active threads = 2, queued tasks = 5, completed tasks = 0]
-	 at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2063)
-	 at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:830)
-	 at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1379)
-	 at com.lp.test.ThreadPool.main(ThreadPool.java:44)
-     i error 15
-     java.util.concurrent.RejectedExecutionException: Task Thread[Thread-15,5,main] rejected from java.util.concurrent.ThreadPoolExecutor@33909752[Running, pool size = 2, active threads = 2, queued tasks = 1, completed tasks = 8]
-	 at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2063)
-	 at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:830)
-	 at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1379)
-	 at com.lp.test.ThreadPool.main(ThreadPool.java:44)
-     被拒绝的任务的数量: 1
-     被拒绝的任务的key: 7
+	taskName:1
+	线程池中当前的线程数量：1，正在执行任务的线程数量：1，曾经创建过的最大线程数量：1，线程池队列中当前的任务数量：0
+	线程池中当前的线程数量：1，正在执行任务的线程数量：1，曾经创建过的最大线程数量：1，线程池队列中当前的任务数量：1
+	线程池中当前的线程数量：2，正在执行任务的线程数量：2，曾经创建过的最大线程数量：2，线程池队列中当前的任务数量：1
+	taskName:3
+	taskName:2
      ```
 
-3. 拒绝策略
-
-   上面说过了线程池中设置了最大线程数，这个数比工作线程数要大，如果执行的任务数量超过了最大线程数就会根据拒绝策略来拒绝任务，但是有需要注意的地方，就是当执行的任务超出工作线程的数量时会把空闲的任务放入队列中，只有当工作线程和队列都满了之后才会去判断数量是否超过了最大线程数。也就是说，如果设置工作线程数为1，最大线程数为1，队列为1000，这时来500个任务也不会执行拒绝操作，因为都放到队列中了。
+4. 拒绝策略
+   线程池一般先检查工作线程数量，超出则放入队列，队列满了则检查最大线程数量，如果3者都超出设定值就会执行拒绝策略。如果设置工作线程数为1，最大线程数为1，队列为1000，这时来500个任务也不会执行拒绝操作，因为都放到队列中了，只有来1001个任务，前1000个任务把队列塞满，第1001个任务就会触发策略。。
 
    - ThreadPoolExecutor.AbortPolicy()
 
      直接放弃任务然后抛出一个RejectedExecutionException异常
+     
    - ThreadPoolExecutor.CallerRunsPolicy()
      
      会在调用线程池execute()方法的线程中执行被拒绝的任务，比如在main()方法中调用的execute()那么就会在主线程中执行被拒绝的任务
+     
    - ThreadPoolExecutor.DiscardOldestPolicy()
 
      会将队列中最先等待的任务抛弃掉，也就是队列的头部元素，然后再尝试提交任务，如果使用的是优先级别的队列则会把优先级最高的元素丢掉
+     
    - ThreadPoolExecutor.DiscardPolicy()
      
      直接放弃任务，但是不抛出任何错误，也不做任何操作
 
-4. 执行流程
+5. 执行流程
 - 提交一个任务到线程池
 - 检查核心线程，没满就执行任务，满了则放入队列
 - 队列也满了则会增加等待线程数
