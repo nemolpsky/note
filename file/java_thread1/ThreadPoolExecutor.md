@@ -127,7 +127,6 @@ ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSi
 
         // 打印线程池运行时的参数信息
         System.out.println(info);
-    }
      ```
    - 执行结果
 
