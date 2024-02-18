@@ -2,6 +2,34 @@
 
 ThreadLocal用于线程间的隔离，当在多线程情况下声明一个共享变量，而这个变量在每个线程中都会使用到，但是每个线程的变量又不会相互影响，虽然可以每个线程内部都定义这个变量再相互传递，但是这会很麻烦，而ThreadLocal的作用是就是解决这种情况，它会为每个线程都准备一份单独的数据，每个线程之间互不影响。
 
+
+### 一、底层原理
+
+它的原理步骤如下，所以实际上是可以看出来这是一个空间换时间的设计，每个线程都有自己的ThreadLocalMap，ThreadLocal本身并不存储值，它只是作为一个key来让线程在ThreadLocalMap中获取或设置值，那肯定可以隔离数据解决共享资源的问题。
+- Thread类中持有一个ThreadLocalMap类型的成员变量。
+- ThreadLocalMap是定义在ThreadLocal类中的内部类，是一个map，用Entry来进行数据存储。
+- 当调用ThreadLocal的set()方法时，先获取当前线程的ThreadLocalMap对象，然后以ThreadLocal对象作为key往ThreadLocalMap中设置值。
+- 当调用ThreadLocal的get()方法时，也是先获取当前线程的ThreadLocalMap对象，以ThreadLocal对象作为key从ThreadLocalMap中获取值。
+
+
+### 二、内存泄漏
+
+因为ThreadLocalMap使用ThreadLocal作为key，用的是软引用，极容易被GC回收，但是如果key被回收了，key对应的value确一直被引用着，那就会一直占用内存。
+```
+ private static ThreadLocal<Integer> threadLocal = new ThreadLocal<>();
+
+ public static void main(String[] args) {
+
+     // 设置 ThreadLocal 变量
+     threadLocal.set(10);
+
+     // 将 ThreadLocal 对象赋值给一个局部变量
+     ThreadLocal<Integer> local = threadLocal;
+ }
+```
+
+### 三、源码分析
+
 1. set()方法
 
    set操作就是调用getMap()方法查找当前对应线程的ThreadLocalMap，有就set操作，没有就创建一个再set。
@@ -203,7 +231,7 @@ ThreadLocal用于线程间的隔离，当在多线程情况下声明一个共享
 
 ---
 
-## 总结
+### 总结
 
 - ThreadLocal可以保证多个线程读写同一个变量而没有并发问题。
 - ThreadLocal底层其实是有一个类似于HashMap的ThreadLocalMap内部类，而线程的源码中实现定义了这样一个map的引用，每个线程对ThreadLocal的操作其实就是对它自己的ThreadLocalMap进行操作，所以数据其实都是放在这个map中，也就是每个线程各有一份自己的数据，所以不会有并发问题。
