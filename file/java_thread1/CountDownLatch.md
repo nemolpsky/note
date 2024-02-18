@@ -3,39 +3,44 @@
 ```CountDownLatch```也是一个```java.util.concurrent```包中的类，可以设置一个初始数值，在数值大于0之前让调用```await()```方法的线程堵塞住，数值为0是则会放开所有阻塞住的线程。
 
 ### 使用例子：
+
+设置```CountDownLatch```为3，在main线程中调用等待，3个子线程去执行完后减1，当```CountDownLatch```为0时主线程才能继续运行。
+
 ```
-public static void main(String[] args) throws InterruptedException {
+public static void main(String[] args) throws Exception {
+CountDownLatch latch = new CountDownLatch(3);
 
-    // 设置初始数值为10
-	CountDownLatch latch = new CountDownLatch(10);
+System.out.println("main start");
 
-    // 循环中调用countDown()减1，如果调用9次则数值为1，主线程和子线程都会阻塞，改为i<10调用10次则主线程和子线程都可以运行
-	for(int i=0;i<9;i++) {
-		latch.countDown();
-		System.out.println(latch.getCount());
+for (int i = 0; i < 3; i++) {
+    new Thread(() -> {
+	try {
+	    System.out.printf("thread %s start \n",Thread.currentThread().getName());
+	    TimeUnit.SECONDS.sleep(5);
+	    System.out.printf("thread %s over \n",Thread.currentThread().getName());
+	} catch (InterruptedException e) {
+	    e.printStackTrace();
+	}finally {
+	    latch.countDown();
 	}
-	
-	
-	new Thread(new Runnable() {
-		
-		@Override
-		public void run() {
-			System.out.println("thread start");
-			try {
-                // 阻塞子线程
-				latch.await();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			System.out.println("thread end");
-		}
-	}).start();
-	
-    // 阻塞主线程
-	latch.await();
-	System.out.println("main end");
+    }).start();
+}
+
+latch.await();
+
+System.out.println("main over");
 
 }
+```
+```
+main start
+thread Thread-0 start 
+thread Thread-2 start 
+thread Thread-1 start 
+thread Thread-2 over 
+thread Thread-0 over 
+thread Thread-1 over 
+main over
 ```
 
 ### 底层原理：
