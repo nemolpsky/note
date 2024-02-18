@@ -2,23 +2,24 @@
 
 1. synchronized实现原理
 
-   - Java对象都是存放在堆内存中，而对象大致可以分为下列三个部分，所以锁的信息都存放在对象头中。
-     - 对象头
+   Java对象都是存放在堆内存中，而对象大致可以分为下列三个部分，所以锁的信息都存放在对象头中。
+   
+- 对象头
+   
+     专门使用一些指针来存放各种对象类型信息，比如对象的```hasCode```，分代年龄，锁的状态等。
+   
+     ![32位](https://github.com/nemolpsky/Note/raw/master/file/java_thread1/images/synchronized1.png)
+     ![64位](https://github.com/nemolpsky/Note/raw/master/file/java_thread1/images/synchronized2.png)
+   
+- 实例变量
+   
+     存储对象的属性信息和父类的信息
+   
+- 填充字符
+   
+     因为虚拟机要求对象的字节大小必须是8字节的整数，所以填充字符就是专门在不是8字节的整数的情况下凑齐这个整数。
 
-       专门使用一些指针来存放各种对象类型信息，比如对象的```hasCode```，分代年龄，锁的状态等。
-
-       ![32位](https://github.com/nemolpsky/Note/raw/master/file/java_thread1/images/synchronized1.png)
-       ![64位](https://github.com/nemolpsky/Note/raw/master/file/java_thread1/images/synchronized2.png)
-
-     - 实例变量
-
-       存储对象的属性信息和父类的信息
-
-     - 填充字符
-
-       因为虚拟机要求对象的字节大小必须是8字节的整数，所以填充字符就是专门在不是8字节的整数的情况下凑齐这个整数。
-
-   - monitor
+- monitor
 
      每个对象都有一个与之关联的```monitor```，而当一个```monitor```被某个线程持有后，就表示这个线程获取了这个对象锁，也就是锁定住了。
 
