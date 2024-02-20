@@ -97,7 +97,7 @@
 ## 分布式
 - [分布式锁实现](file/distributed/distributed_lock.md)
 - [分布式架构概述](file/distributed/分布式架构概述.md)
-- [分布式一致性协议](file/distributed/分布式一致性协议.md)
+- [分布式事务](file/distributed/分布式一致性协议.md)
 
 ---
 
