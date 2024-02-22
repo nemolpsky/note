@@ -62,10 +62,6 @@ Record Locks，它是针对单条数据进行加锁，例如```SELECT * FROM tab
 #### 4. 间隙锁
 Gap Locks，间隙锁是锁住一个范围，只存在于默认隔离级别下，是为了解决幻读问题。间隙锁的场景就要复杂的多，详细参考[MySQL间隙锁](https://github.com/nemolpsky/note/blob/master/file/mysql/MySQL间隙锁.md)。
 
-
-
-间隙锁是为了解决幻读的产物，又不能影响到MySQL上其它原有的设计，所以除了上面一些通用的规则之外还会有很多细节，总之加锁的时候要慎重，考虑周全，试验下。
-
 - https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-gap-locks
 - https://time.geekbang.org/column/article/75173
 - https://time.geekbang.org/column/article/75659
