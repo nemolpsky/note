@@ -136,6 +136,7 @@
 - [MySQL隔离级别](file/mysql/MySQL隔离级别.md)
 - [MySQL一致性读](file/mysql/MySQL一致性读.md)
 - [MySQL中的锁详解](file/mysql/MySQL中的锁种类.md)
+- [MySQL间隙锁](file/mysql/MySQL间隙锁.md)
 - [MySQL死锁检测](file/mysql/MySQL死锁检测.md)
 - [MySQL explain参数解析](file/mysql/mysql_explain.md)
 - [MySQL索引基础](file/mysql/mysql_index1.md)
