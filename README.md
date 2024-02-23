@@ -138,6 +138,7 @@
 - [MySQL中的锁详解](file/mysql/MySQL中的锁种类.md)
 - [MySQL间隙锁](file/mysql/MySQL间隙锁.md)
 - [MySQL死锁检测](file/mysql/MySQL死锁检测.md)
+- [MySQL底层原理](file/mysql/MySQL日志机制.md)
 - [MySQL explain参数解析](file/mysql/mysql_explain.md)
 - [MySQL索引基础](file/mysql/mysql_index1.md)
 - [MySQL索引进阶](file/mysql/mysql_index2.md)
