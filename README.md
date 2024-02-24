@@ -143,7 +143,7 @@
 - [MySQL索引基础](file/mysql/mysql_index1.md)
 - [MySQL索引进阶](file/mysql/mysql_index2.md)
 - [MySQL优化](file/mysql/mysql_optimize.md)
-- [MySQL底层原理](file/mysql/mysql_tree.md)
+- [MySQL底层索引原理](file/mysql/mysql_tree.md)
 
 
 
